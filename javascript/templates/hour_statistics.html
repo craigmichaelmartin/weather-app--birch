@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-xs-12 statistics-header">
+        {{when scale weekday monthname day hour}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Conditions
+    </div>
+    <div class="col-xs-6">
+        {{condition}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Temperature
+    </div>
+    <div class="col-xs-6">
+        <span class="js-hourStatisticsTemperature">{{temperature scale temperature}}</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Feels Like
+    </div>
+    <div class="col-xs-6">
+        {{temperature scale feelsLike}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Humidity
+    </div>
+    <div class="col-xs-6">
+        {{humidity}}%
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Dew Point
+    </div>
+    <div class="col-xs-6">
+        {{temperature scale dewpoint}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Wind
+    </div>
+    <div class="col-xs-6">
+        {{speed scale windSpeed}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Precipitation
+    </div>
+    <div class="col-xs-6">
+        {{length scale precipitation}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Heat Index
+    </div>
+    <div class="col-xs-6">
+        {{temperature scale heatIndex}}
+    </div>
+</div>

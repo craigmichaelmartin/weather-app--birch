@@ -1,0 +1,39 @@
+.day {
+    cursor: pointer;
+    width: 10%;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-shadow: @font-shadow-dark 0 0 3px;
+    text-shadow: @font-shadow-dark--transparent 0 0 3px;
+    color: white;
+    font-size: 1.3em;
+}
+.day.is-active {
+    border-radius: 10px;
+    background-color: @secondary;
+    background-color: @secondary--transparent;
+    box-shadow: @box-shadow 1px 1px 10px;
+    box-shadow: @box-shadow--transparent 1px 1px 10px;
+}
+.day-label {
+    text-align: center;
+    font-size: 1.2em;
+}
+.day-temperature {
+    font-weight: 700;
+}
+.day-image {
+    display:block;
+    margin:auto;
+}
+@media (max-width: 768px) {
+    .day-image {
+        width: 30px;
+        height: 30px;
+    }
+    .day {
+        width: 100%;
+        float: none;
+    }
+}

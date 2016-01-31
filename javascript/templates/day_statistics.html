@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-xs-12 statistics-header">
+        {{when scale weekday monthname day null}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Conditions
+    </div>
+    <div class="col-xs-6">
+        {{condition}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Low
+    </div>
+    <div class="col-xs-6">
+        {{temperature scale low}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        High
+    </div>
+    <div class="col-xs-6">
+        <span class="js-dayStatisticsHigh">{{temperature scale high}}</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Snowfall
+    </div>
+    <div class="col-xs-6">
+        {{length scale totalSnow}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Humidity
+    </div>
+    <div class="col-xs-6">
+        {{averageHumidity}}%
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Wind
+    </div>
+    <div class="col-xs-6">
+        {{speed scale averageWind}} {{averageWindDirection}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        Precipitation
+    </div>
+    <div class="col-xs-6">
+        {{length scale precipitation}}
+    </div>
+</div>

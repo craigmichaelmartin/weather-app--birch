@@ -1,0 +1,82 @@
+.d3Chart {
+    height: 450px;
+}
+
+.hourBar:hover {
+    fill: white;
+    cursor: pointer;
+}
+
+.hourBar.is-active {
+    fill: @primary;
+}
+
+.hourText {
+    cursor: pointer;
+}
+
+.d3Chart rect {
+    fill: @secondary;
+    fill: @secondary--transparent;
+    shape-rendering: crispEdges;
+}
+
+.d3Chart text {
+    fill: @font-color;
+    text-shadow: .1em .1em .5em white;
+    font: 12px sans-serif;
+    text-anchor: middle;
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* aspect ratio */
+    vertical-align: top;
+}
+
+.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.x.axis line {
+  display: none;
+}
+
+.x.axis text {
+  display: none;
+}
+
+@media (max-width: @screen-sm-min) {
+
+    .d3Chart {
+        height: 250px;
+    }
+
+    .hourText {
+        display: none;
+    }
+
+    .x.axis text {
+        display: inline-block;
+        font-size: 1.5em;
+        text-shadow: #000000 0 0 3px;
+        fill: white;
+    }
+
+}

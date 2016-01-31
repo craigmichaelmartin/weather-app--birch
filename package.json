@@ -1,0 +1,41 @@
+{
+  "name": "weather-app--ash",
+  "description": "A fun little project showcasing some skills",
+  "version": "0.0.1",
+  "author": "Craig Martin",
+  "devDependencies": {
+    "bower": "~1.4.1",
+    "grunt": "~0.4.5",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-connect": "^0.11.2",
+    "grunt-contrib-less": "~1.0.0",
+    "grunt-contrib-requirejs": "~0.4.4",
+    "grunt-contrib-uglify": "~0.5.1",
+    "grunt-contrib-watch": "~0.6.1",
+    "load-grunt-tasks": "~0.6.0",
+    "grunt-csscomb": "~3.0.1",
+    "grunt-jscs": "2.3.0",
+    "grunt-autoprefixer": "~3.0.3",
+    "grunt-contrib-cssmin": "~0.12.3",
+    "grunt-contrib-csslint": "~0.5.0",
+    "grunt-contrib-jshint": "~0.11.2",
+    "grunt-karma": "~0.12.0",
+    "karma": "~0.13.15",
+    "mocha": "~2.3.0",
+    "karma-mocha": "~0.2.0",
+    "jasmine-core": "~2.3.4",
+    "karma-jasmine": "~0.3.6",
+    "phantomjs": "~1.9.18",
+    "karma-phantomjs-launcher": "~0.2.1",
+    "karma-sinon-chai": "~1.0.0",
+    "karma-chrome-launcher": "~0.2.0",
+    "karma-firefox-launcher": "~0.1.6",
+    "karma-coverage": "~0.5.3"
+  },
+  "scripts": {
+    "setup": "rm -rf node_modules/ && npm install && rm -rf public/ && bower install && grunt dist",
+    "demo": "npm run setup && grunt runserver",
+    "deployment": "git checkout gh-pages && git fetch origin master && git reset --hard origin/master && npm run setup && rsync -var --delete-after weather-app--ash/ . && rm -rf Gruntfile.js README.md bower.json build.txt package.json .bowerrc .gitignore node_modules/ less/ test/ public/vendor/JSON-js/ public/vendor/backbone public/vendor/bootstrap/.bower.json public/vendor/bootstrap/Gruntfile.js public/vendor/bootstrap/LICENSE public/vendor/bootstrap/README.md public/vendor/bootstrap/bower.json public/vendor/bootstrap/fonts public/vendor/bootstrap/dist/css/ public/vendor/bootstrap/dist/js public/vendor/bootstrap/grunt public/vendor/bootstrap/js public/vendor/bootstrap/less/ public/vendor/bootstrap/package.js public/vendor/bootstrap/package.json public/vendor/d3 public/vendor/es5-shim public/vendor/handlebars public/vendor/jquery public/vendor/requirejs-text public/vendor/sinon-shai public/vendor/sinonjs public/vendor/underscore javascript/.jscsrc javascript/.jshintrc && git add . && git commit -m 'deploy app' && git push -f origin gh-pages && git checkout master"
+  }
+}

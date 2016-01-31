@@ -1,0 +1,21 @@
+{
+  "name": "schedule_app",
+  "author": "Craig Martin",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "1.11.3",
+    "underscore": "1.8.3",
+    "backbone": "1.2.1",
+    "requirejs": "2.1.18",
+    "requirejs-text": "2.0.14",
+    "JSON-js": "git://github.com/douglascrockford/JSON-js#c98948ae1944a28e2e8ebc3717894e580aeaaa05",
+    "bootstrap": "v3.3.5",
+    "handlebars": "~3.0.3",
+    "d3": "v3.5.6",
+    "es5-shim": "v4.1.9"
+  },
+  "devDependencies": {
+    "sinonjs": "~1.14.1",
+    "sinon-chai": "~2.8.0"
+  }
+}
