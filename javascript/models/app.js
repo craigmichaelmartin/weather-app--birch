@@ -1,76 +1,71 @@
-define([
-    'models/model',
-    'util/date',
-    'underscore'
-], function (Model, dateUtils, _) {
+import Model from './model';
+import { getDeltaDate } from '../util/date';
+import _ from 'underscore';
 
-    'use strict';
+class AppState extends Model {
 
-    var AppState = Model.extend({
+    defaults() {
+        return {
+            zip: void 0,
+            day: new Date().getDate(),
+            hour: void 0,
+            scale: 'english'
+        };
+    }
 
-        defaults: function () {
-            return {
-                zip: void 0,
-                day: new Date().getDate(),
-                hour: void 0,
-                scale: 'english'
-            };
-        },
+    get scales() { return ['english', 'metric']; }
 
-        scales: ['english', 'metric'],
+    get zipNotNumeric() { return 'Zip code must be numeric'; }
+    get zipNotLength() { return 'Zip code must be five digits'; }
+    get dayNotNear() { return 'Day must be within ten days of today'; }
+    get hourNeedsDay() { return 'Day must be selected to choose an hour'; }
+    get hourNotValid() { return 'Hour must be between 0 and 23'; }
+    get hourNotValidToday() { return 'Hour must be after current hour'; }
+    get scaleNotValid() {
+        var scales = this.scales.join(', ');
+        var lastComma = scales.lastIndexOf(',');
+        var readable = scales.substring(0, lastComma) + ' or' + scales.substring(lastComma + 1);
+        return 'Scale must be ' + readable;
+    }
 
-        zipNotNumeric: 'Zip code must be numeric',
-        zipNotLength: 'Zip code must be five digits',
-        dayNotNear: 'Day must be within ten days of today',
-        hourNeedsDay: 'Day must be selected to choose an hour',
-        hourNotValid: 'Hour must be between 0 and 23',
-        hourNotValidToday: 'Hour must be after current hour',
-        get scaleNotValid() {
-            var scales = this.scales.join(', ');
-            var lastComma = scales.lastIndexOf(',');
-            var readable = scales.substring(0, lastComma) + ' or' + scales.substring(lastComma + 1);
-            return 'Scale must be ' + readable;
-        },
-
-        validate: function (attrs, options) {
-            var errors = [];
-            var now = new Date();
-            if (!_.isNumber(attrs.zip) || _.isNaN(attrs.zip)) {
-                errors.push(this.zipNotNumeric);
-            } else if ((attrs.zip < 0) || (attrs.zip.toString().length !== 5)) {
-                errors.push(this.zipNotLength);
-            }
-            if (attrs.day) {
-                var dates = [];
-                for (var index = 0; index < 10; index++) {
-                    dates.push(dateUtils.getDeltaDate(now, index).getDate());
-                }
-                if (dates.indexOf(attrs.day) === -1) {
-                    errors.push(this.dayNotNear);
-                }
-            }
-            if (attrs.hour) {
-                if (!attrs.day) {
-                    errors.push(this.hourNeedsDay);
-                }
-                var validHours = _.range(24); //Array.apply(null, {length: 24}).map(Number.call, Number);
-                if (validHours.indexOf(attrs.hour) === -1) {
-                    errors.push(this.hourNotValid);
-                } else if (attrs.day === now.getDate()) {
-                    if (validHours.slice(now.getHours()).indexOf(attrs.hour) === -1) {
-                        errors.push(this.hourNotValidToday);
-                    }
-                }
-            }
-            if (attrs.scale) {
-                if (this.scales.indexOf(attrs.scale) === -1) {
-                    errors.push(this.scaleNotValid);
-                }
-            }
-            return errors.length ? errors : void 0;
+    validate(attrs, options) {
+        var errors = [];
+        var now = new Date();
+        if (!_.isNumber(attrs.zip) || _.isNaN(attrs.zip)) {
+            errors.push(this.zipNotNumeric);
+        } else if ((attrs.zip < 0) || (attrs.zip.toString().length !== 5)) {
+            errors.push(this.zipNotLength);
         }
+        if (attrs.day) {
+            var dates = [];
+            for (var index = 0; index < 10; index++) {
+                dates.push(getDeltaDate(now, index).getDate());
+            }
+            if (dates.indexOf(attrs.day) === -1) {
+                errors.push(this.dayNotNear);
+            }
+        }
+        if (attrs.hour) {
+            if (!attrs.day) {
+                errors.push(this.hourNeedsDay);
+            }
+            var validHours = _.range(24); //Array.apply(null, {length: 24}).map(Number.call, Number);
+            if (validHours.indexOf(attrs.hour) === -1) {
+                errors.push(this.hourNotValid);
+            } else if (attrs.day === now.getDate()) {
+                if (validHours.slice(now.getHours()).indexOf(attrs.hour) === -1) {
+                    errors.push(this.hourNotValidToday);
+                }
+            }
+        }
+        if (attrs.scale) {
+            if (this.scales.indexOf(attrs.scale) === -1) {
+                errors.push(this.scaleNotValid);
+            }
+        }
+        return errors.length ? errors : void 0;
+    }
 
-    });
+}
 
-    return AppState;
-});
+export default AppState;

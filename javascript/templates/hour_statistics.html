@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12 statistics-header">
-        {{when scale weekday monthname day hour}}
+        <%= headerText %>
     </div>
 </div>
 <div class="row">
@@ -8,7 +8,7 @@
         Conditions
     </div>
     <div class="col-xs-6">
-        {{condition}}
+        <%= condition %>
     </div>
 </div>
 <div class="row">
@@ -16,7 +16,7 @@
         Temperature
     </div>
     <div class="col-xs-6">
-        <span class="js-hourStatisticsTemperature">{{temperature scale temperature}}</span>
+        <span class="js-hourStatisticsTemperature"><%= temp %></span>
     </div>
 </div>
 <div class="row">
@@ -24,7 +24,7 @@
         Feels Like
     </div>
     <div class="col-xs-6">
-        {{temperature scale feelsLike}}
+        <%= feelsLike %>
     </div>
 </div>
 <div class="row">
@@ -32,7 +32,7 @@
         Humidity
     </div>
     <div class="col-xs-6">
-        {{humidity}}%
+        <%= humidity %>%
     </div>
 </div>
 <div class="row">
@@ -40,7 +40,7 @@
         Dew Point
     </div>
     <div class="col-xs-6">
-        {{temperature scale dewpoint}}
+        <%= dewpoint %>
     </div>
 </div>
 <div class="row">
@@ -48,7 +48,7 @@
         Wind
     </div>
     <div class="col-xs-6">
-        {{speed scale windSpeed}}
+        <%= windSpeed %> <%= windDirection %>
     </div>
 </div>
 <div class="row">
@@ -56,7 +56,7 @@
         Precipitation
     </div>
     <div class="col-xs-6">
-        {{length scale precipitation}}
+        <%= precipitation %>
     </div>
 </div>
 <div class="row">
@@ -64,6 +64,6 @@
         Heat Index
     </div>
     <div class="col-xs-6">
-        {{temperature scale heatIndex}}
+        <%= heatIndex %>
     </div>
 </div>

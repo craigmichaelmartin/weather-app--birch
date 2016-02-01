@@ -17,15 +17,15 @@ define([
             handlebarsHelpers: 'util/handlebarsHelpers',
             d3: '../public/vendor/d3/d3',
             es5shim: '../public/vendor/es5-shim/es5-shim'
-        },
+        }
         shim: {
-            jquery: {exports: '$'},
-            underscore: {exports: '_'},
-            backbone: {deps: ['jquery', 'underscore'], exports: 'Backbone'},
-            bootstrap: {deps: ['jquery']},
-            handlebars: {exports: 'Handlebars'},
+            jquery: {exports: '$'}
+            underscore: {exports: '_'}
+            backbone: {deps: ['jquery', 'underscore'], exports: 'Backbone'}
+            bootstrap: {deps: ['jquery']}
+            handlebars: {exports: 'Handlebars'}
             handlebarsHelpers: {deps: ['handlebars']}
-        },
+        }
         urlArgs: 'version=0.0.1'
     });
 

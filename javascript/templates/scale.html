@@ -1,11 +1,11 @@
 <div class="scale js-scale btn-group" data-toggle="buttons">
-    <label class="btn btn-primary scale-button js-english {{#ifCond scale '===' 'english'}}active{{/ifCond}}">
-        <input type="radio" name="js-scale-radio" autocomplete="off" {{#ifCond scale '===' 'english'}}checked=""{{/ifCond}}>
+    <label class="btn btn-primary scale-button js-english <% if (scale === 'english') { %>active<% } %>">
+        <input type="radio" name="js-scale-radio" autocomplete="off" <% if (scale === 'english') { %>checked=""<% } %>>
         <span class="hidden-xs">English</span>
         <span class="visible-xs">&deg;F</span>
     </label>
-    <label class="btn btn-primary scale-button js-metric {{#ifCond scale '===' 'metric'}}active{{/ifCond}}">
-        <input type="radio" name="js-scale-radio" autocomplete="off" {{#ifCond scale '===' 'metric'}}checked=""{{/ifCond}}>
+    <label class="btn btn-primary scale-button js-metric <% if (scale === 'metric') { %>active<% } %>">
+        <input type="radio" name="js-scale-radio" autocomplete="off" <% if (scale === 'metric') { %>checked=""<% } %>>
         <span class="hidden-xs">Metric</span>
         <span class="visible-xs">&deg;C</span>
     </label>

@@ -1,17 +1,17 @@
 <div class="zip js-zip js-location-item">
     <span class="zip-marker js-zip-marker glyphicon glyphicon-map-marker"></span>
-    <span class="zip-display js-zip-display js-display" {{#unless zip}}style="display:none"{{/unless}}>
-        {{zip}}
+    <span class="zip-display js-zip-display js-display" <% if (!zip) { %>style="display:none"<% } %>>
+        <%= zip %>
         <span class="zip-pencil glyphicon glyphicon-pencil hidden-xs"></span>
     </span>
-    <input value="{{zip}}" class="form-group form-control js-edit zip-edit" {{#if zip}}style="display:none"{{/if}}>
+    <input value="<%= zip %>" class="form-group form-control js-edit zip-edit" <% if (zip) { %>style="display:none"<% } %>>
     <span class="js-spinner spinner" style="display:none"><span class="glyphicon glyphicon-transfer"></span></span>
 </div>
 <div class="row">
     <div class="col-md-12">
         <div class="conditions">
-            {{temperature scale temperature}}
-            {{condition}}
+            <%= temperature %>
+            <%= condition %>
         </div>
     </div>
 </div>

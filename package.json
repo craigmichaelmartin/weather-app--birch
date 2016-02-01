@@ -4,6 +4,12 @@
   "version": "0.0.1",
   "author": "Craig Martin",
   "devDependencies": {
+    "backbone": "1.2.3",
+    "underscore": "1.8.3",
+    "jquery": "2.2.0",
+    "bootstrap": "3.3.6",
+    "d3": "3.5.14",
+    "es5-shim": "4.5.2",
     "bower": "~1.4.1",
     "grunt": "~0.4.5",
     "grunt-cli": "~0.1.13",
@@ -21,6 +27,19 @@
     "grunt-contrib-csslint": "~0.5.0",
     "grunt-contrib-jshint": "~0.11.2",
     "grunt-karma": "~0.12.0",
+    "connect": "3.4.1",
+    "http-server": "0.8.5",
+    "babel": "~5.8.19",
+    "babelify": "^6.2.0",
+    "browserify": "11.0.1",
+    "brfs": "1.4.0",
+    "watch": "~0.16.0",
+    "less": "~2.5.1",
+    "watchify": "3.3.1",
+    "browserify-shim": "^3.8.2",
+    "catw": "1.0.1",
+    "less-plugin-clean-css": "",
+    "uglify-js": "v2.4.24",
     "karma": "~0.13.15",
     "mocha": "~2.3.0",
     "karma-mocha": "~0.2.0",
@@ -34,8 +53,31 @@
     "karma-coverage": "~0.5.3"
   },
   "scripts": {
-    "setup": "rm -rf node_modules/ && npm install && rm -rf public/ && bower install && grunt dist",
-    "demo": "npm run setup && grunt runserver",
-    "deployment": "git checkout gh-pages && git fetch origin master && git reset --hard origin/master && npm run setup && rsync -var --delete-after weather-app--ash/ . && rm -rf Gruntfile.js README.md bower.json build.txt package.json .bowerrc .gitignore node_modules/ less/ test/ public/vendor/JSON-js/ public/vendor/backbone public/vendor/bootstrap/.bower.json public/vendor/bootstrap/Gruntfile.js public/vendor/bootstrap/LICENSE public/vendor/bootstrap/README.md public/vendor/bootstrap/bower.json public/vendor/bootstrap/fonts public/vendor/bootstrap/dist/css/ public/vendor/bootstrap/dist/js public/vendor/bootstrap/grunt public/vendor/bootstrap/js public/vendor/bootstrap/less/ public/vendor/bootstrap/package.js public/vendor/bootstrap/package.json public/vendor/d3 public/vendor/es5-shim public/vendor/handlebars public/vendor/jquery public/vendor/requirejs-text public/vendor/sinon-shai public/vendor/sinonjs public/vendor/underscore javascript/.jscsrc javascript/.jshintrc && git add . && git commit -m 'deploy app' && git push -f origin gh-pages && git checkout master"
+    "demo": "npm run setup && npm run demo-server",
+    "demo-server": "http-server ./ -p 9001 -o",
+    "dev-server": "http-server ../ -p 8080 -o",
+    "deployment": "git checkout gh-pages && git fetch origin master && git reset --hard origin/master && npm run setup && rsync -var --delete-after weather-app--ash/ . && rm -rf Gruntfile.js README.md bower.json build.txt package.json .bowerrc .gitignore node_modules/ less/ test/ public/vendor/JSON-js/ public/vendor/backbone public/vendor/bootstrap/.bower.json public/vendor/bootstrap/Gruntfile.js public/vendor/bootstrap/LICENSE public/vendor/bootstrap/README.md public/vendor/bootstrap/bower.json public/vendor/bootstrap/fonts public/vendor/bootstrap/dist/css/ public/vendor/bootstrap/dist/js public/vendor/bootstrap/grunt public/vendor/bootstrap/js public/vendor/bootstrap/less/ public/vendor/bootstrap/package.js public/vendor/bootstrap/package.json public/vendor/d3 public/vendor/es5-shim public/vendor/handlebars public/vendor/jquery public/vendor/requirejs-text public/vendor/sinon-shai public/vendor/sinonjs public/vendor/underscore javascript/.jscsrc javascript/.jshintrc && git add . && git commit -m 'deploy app' && git push -f origin gh-pages && git checkout master",
+
+    "make-static-dirs": "mkdir -p css && mkdir -p compiledES6",
+    "clean-built-dirs": "rm -rf weather-app--birch && rm -rf css && rm -rf compiledES6",
+    "clean-installed-dirs": "rm -rf node_modules && rm -rf public",
+
+    "watch-less": "watch 'npm run build-less' less/",
+    "build-less": "lessc --clean-css less/main.less css/app.css",
+    "watch-es6": "watchify -t babelify -t brfs -t browserify-shim javascript/main.js -o compiledES6/main.js -dv",
+    "build-es6": "browserify -t babelify -t brfs -t browserify-shim javascript/main.js -dv | uglifyjs > compiledES6/main.js",
+    "watch": "npm run watch-es6 && npm run watch-less",
+    "build": "npm run build-less && npm run build-es6",
+
+    "dist": "npm run clean-built-dirs && npm run make-static-dirs && npm run build",
+    "setup-project": "npm run clean-installed-dirs && npm install && bower install",
+    "setup": "npm run setup-project && npm run dist"
+  },
+  "browserify-shim": {
+    "bootstrap": {
+      "depends": [
+        "jquery"
+      ]
+    }
   }
 }

@@ -1,49 +1,65 @@
-define([
-    'views/view',
-    'text!templates/day_statistics.html',
-    'text!templates/hour_statistics.html',
-    'handlebarsHelpers',
-    'underscore'
-], function (View, dayTemplate, hourTemplate, Handlebars, _) {
+import View from '../views/view';
+import { getScaledTemperatureDegreeUnit } from '../util/temperature';
+import { getDateSentence } from '../util/date';
+import { getScaledLength } from '../util/length';
+import { getScaledSpeedUnit } from '../util/speed';
+import _ from 'underscore';
 
-    'use strict';
+const fs = require('fs');
+const dayTemplate = fs.readFileSync(__dirname + '/../templates/day_statistics.html', 'utf8');
+const hourTemplate = fs.readFileSync(__dirname + '/../templates/hour_statistics.html', 'utf8');
 
-    var StatisticsView = View.extend({
+class StatisticsView extends View {
 
-        initialize: function (options) {
-            options = options || {};
-            this.appState = options.appState;
-            this.hours = options.hours;
-            this.days = options.days;
-            this.listenTo(this.appState, 'dataReady', this.render);
-            this.listenTo(this.appState, 'change:day', this.showDay);
-            this.listenTo(this.appState, 'change:hour', this.showHour);
-            this.listenTo(this.appState, 'change:scale', this.render);
-            if (this.appState.get('hour')) {
-                this.showHour(this.appState, this.appState.get('hour'));
-            } else if (this.appState.get('day')) {
-                this.showDay(this.appState, this.appState.get('day'));
-            }
-        },
-
-        showDay: function (model, day) {
-            this.model = this.days.findWhere({day: +day});
-            this.template = Handlebars.compile(dayTemplate);
-            this.render();
-        },
-
-        showHour: function (model, hour) {
-            this.model = this.hours.findWhere({day: +this.appState.get('day'), hour: +hour});
-            this.template = Handlebars.compile(hourTemplate);
-            this.render();
-        },
-
-        getTemplateData: function () {
-            return _.extend({}, this.model.attributes, this.appState.attributes);
+    initialize(options) {
+        options = options || {};
+        this.appState = options.appState;
+        this.hours = options.hours;
+        this.days = options.days;
+        this.listenTo(this.appState, 'dataReady', this.render);
+        this.listenTo(this.appState, 'change:day', this.showDay);
+        this.listenTo(this.appState, 'change:hour', this.showHour);
+        this.listenTo(this.appState, 'change:scale', this.render);
+        if (this.appState.get('hour')) {
+            this.showHour(this.appState, this.appState.get('hour'));
+        } else if (this.appState.get('day')) {
+            this.showDay(this.appState, this.appState.get('day'));
         }
+    }
 
-    });
+    showDay(model, day) {
+        this.model = this.days.findWhere({day: +day});
+        this.template = _.template(dayTemplate);
+        this.render();
+    }
 
-    return StatisticsView;
+    showHour(model, hour) {
+        this.model = this.hours.findWhere({day: +this.appState.get('day'), hour: +hour});
+        this.template = _.template(hourTemplate);
+        this.render();
+    }
 
-});
+    getTemplateData() {
+        const { weekday, monthname, day, hour, low, high, temperature,
+                feelsLike, dewPoint, heatIndex, totalSnow, averageWind,
+                windSpeed, windDirection, averageWindDirection,
+                precipitation } = this.model.attributes;
+        const { scale } = this.appState.attributes;
+        return _.extend({}, this.model.attributes, this.appState.attributes, {
+            headerText: getDateSentence(scale, weekday, monthname, day, hour),
+            highTemp: getScaledTemperatureDegreeUnit(scale, high),
+            lowTemp: getScaledTemperatureDegreeUnit(scale, low),
+            temp: getScaledTemperatureDegreeUnit(scale, temperature),
+            feelsLike: getScaledTemperatureDegreeUnit(scale, feelsLike),
+            dewPoint: getScaledTemperatureDegreeUnit(scale, dewPoint),
+            heatIndex: getScaledTemperatureDegreeUnit(scale, heatIndex),
+            snow: getScaledLength(scale, totalSnow),
+            windSpeed: getScaledSpeedUnit(scale, averageWind || windSpeed),
+            windDirection: averageWindDirection || windDirection,
+            precipitation: getScaledLength(scale, precipitation),
+        });
+    }
+
+}
+
+export default StatisticsView;

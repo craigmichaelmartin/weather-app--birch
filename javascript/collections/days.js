@@ -1,34 +1,30 @@
-define([
-    'collections/collection',
-    'models/day'
-], function (Collection, Day) {
+import Collection from './collection';
+import Day from '../models/day';
 
-    'use strict';
+class Days extends Collection {
 
-    var Days = Collection.extend({
+    get model() {
+        return Day;
+    }
 
-        model: Day,
+    buildUrl(zip) {
+        // I would rather not get the full hourly forcast for all 10 days,
+        // and instead as needed, but the rate limit and api design push me toward this path.
+        // If no zip is provided, use the ip and return geolookup info as well.
+        return 'http://api.wunderground.com/api/3f6df2a3f0916b99/' + (zip ? '' : 'geolookup/') + 'forecast10day/q/' + (zip || 'autoip') + '.json';
+    }
 
-        buildUrl: function (zip) {
-            // I would rather not get the full hourly forcast for all 10 days,
-            // and instead as needed, but the rate limit and api design push me toward this path.
-            // If no zip is provided, use the ip and return geolookup info as well.
-            return 'http://api.wunderground.com/api/3f6df2a3f0916b99/' + (zip ? '' : 'geolookup/') + 'forecast10day/q/' + (zip || 'autoip') + '.json';
-        },
+    fetch(options) {
+        options.url = this.buildUrl(options.zip);
+        // If not allowing cors, this line would be needed.
+        // options.dataType = "jsonp";
+        return Collection.prototype.fetch.call(this, options);
+    }
 
-        fetch: function (options) {
-            options.url = this.buildUrl(options.zip);
-            // If not allowing cors, this line would be needed.
-            // options.dataType = "jsonp";
-            return Collection.prototype.fetch.call(this, options);
-        },
+    parse(response) {
+        return response.forecast.simpleforecast.forecastday;
+    }
 
-        parse: function (response) {
-            return response.forecast.simpleforecast.forecastday;
-        }
+}
 
-    });
-
-    return Days;
-
-});
+export default Days;

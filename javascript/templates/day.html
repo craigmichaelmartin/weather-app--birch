@@ -1,16 +1,16 @@
-<div class="js-day day {{#if isActive}}is-active{{/if}}">
+<div class="js-day day <%= activeClass %>">
     <div class="row">
         <div class="col-sm-12 col-xs-3">
-            <div class="day-label">{{weekdayShort}}</div>
+            <div class="day-label"><%= weekdayShort %></div>
         </div>
         <div class="col-sm-12 col-xs-3">
-            <img class="day-image" src="{{iconUrl}}"></img>
+            <img class="day-image" src="<%= iconUrl %>"></img>
         </div>
         <div class="col-sm-1 col-sm-offset-1 col-xs-3">
-            <span class="day-temperature js-dayHighTemperature">{{temperatureNoUnits scale high}}</span>
+            <span class="day-temperature js-dayHighTemperature"><%= highTemp %></span>
         </div>
         <div class="col-sm-1 col-sm-offset-3 col-xs-3">
-            <span class="day-temperature js-dayLowTemperature">{{temperatureNoUnits scale low}}</span>
+            <span class="day-temperature js-dayLowTemperature"><%= lowTemp %></span>
         </div>
     </div>
 </div>

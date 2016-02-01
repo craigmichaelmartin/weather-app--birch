@@ -1,52 +1,53 @@
-define([
-    'views/view',
-    'text!templates/day.html',
-    'handlebars',
-    'underscore',
-    'jquery'
-], function (View, template, Handlebars, _, $) {
+import View from '../views/view';
+import { getScaledTemperatureDegree } from '../util/temperature';
+import $ from 'jquery';
+import _ from 'underscore';
 
-    'use strict';
+const fs = require('fs');
+const template = fs.readFileSync(__dirname + '/../templates/day.html', 'utf8');
 
-    var DayView = View.extend({
+class DayView extends View {
 
-        template: Handlebars.compile(template),
+    get template() {
+        return _.template(template);
+    }
 
-        events: {
+    get events() {
+        return {
             'click .day': 'loadDay'
-        },
+        };
+    }
 
-        initialize: function (options) {
-            this.model = options.model;
-            this.appState = options.appState;
-        },
+    initialize(options) {
+        this.model = options.model;
+        this.appState = options.appState;
+    }
 
-        deleteViewAndModel: function () {
-            this.model.destroy();
-            this.deleteView();
-        },
+    deleteViewAndModel() {
+        this.model.destroy();
+        this.deleteView();
+    }
 
-        deleteView: function () {
-            this.remove();
-            this.unbind();
-        },
+    deleteView() {
+        this.remove();
+        this.unbind();
+    }
 
-        loadDay: function (ev) {
-            $('.day.is-active').removeClass('is-active');
-            $(ev.currentTarget).addClass('is-active');
-            this.appState.attributes.hour = void 0;
-            this.appState.set('day', this.model.get('day'));
-        },
+    loadDay(ev) {
+        $('.day.is-active').removeClass('is-active');
+        $(ev.currentTarget).addClass('is-active');
+        this.appState.attributes.hour = void 0;
+        this.appState.set('day', this.model.get('day'));
+    }
 
-        getTemplateData: function () {
-            return _.extend({
-                scale: this.appState.get('scale'),
-                isActive: this.appState.get('day') === this.model.get('day')
-            }, this.model.attributes);
-        }
+    getTemplateData() {
+        return _.extend({
+            activeClass: this.appState.get('day') === this.model.get('day') ? 'is-active' : '',
+            highTemp: getScaledTemperatureDegree(this.appState.get('scale'), this.model.get('high')),
+            lowTemp: getScaledTemperatureDegree(this.appState.get('scale'), this.model.get('low'))
+        }, this.model.attributes);
+    }
 
-    });
+}
 
-    return DayView;
-
-});
+export default DayView;

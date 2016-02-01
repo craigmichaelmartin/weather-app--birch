@@ -1,12 +1,7 @@
-define([
-    'backbone'
-], function (Backbone) {
+import Backbone from 'backbone';
 
-    'use strict';
+class BaseModel extends Backbone.Model {
 
-    var BaseModel = Backbone.Model.extend({
+}
 
-    });
-
-    return BaseModel;
-});
+export default BaseModel;

@@ -1,14 +1,7 @@
-define([
-    'backbone'
-], function (Backbone) {
+import Backbone from 'backbone';
 
-    'use strict';
+class BaseCollection extends Backbone.Collection {
 
-    // Nothing here for now.
-    var BaseCollection = Backbone.Collection.extend({
+}
 
-    });
-
-    return BaseCollection;
-
-});
+export default BaseCollection;
