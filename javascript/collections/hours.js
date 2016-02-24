@@ -30,7 +30,9 @@ class Hours extends Collection {
         }));
     }
 
-    comparator: 'hour'
+    get comparator() {
+        return 'hour';
+    }
 
 }
 
