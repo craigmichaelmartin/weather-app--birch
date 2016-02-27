@@ -21,15 +21,33 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'node_modules/mocha/mocha.js',
-      'node_modules/sinon/pkg/sinon.js',
-      'node_modules/chai/chai.js',
-      'node_modules/jquery/dist/jquery.js',
-      'node_modules/bootstrap/dist/js/bootstrap.js',
-      'node_modules/babel-polyfill/dist/polyfill.js',
-      'javascript/**/*.js',
-      //'test/mocha/specs/**/*.spec.js'
-      'test/mocha/specs/unit/**/*.spec.js'
+        'node_modules/jquery/dist/jquery.js',
+        'node_modules/mocha/mocha.js',
+        'node_modules/sinon/pkg/sinon.js',
+        'node_modules/chai/chai.js',
+        'node_modules/bootstrap/dist/js/bootstrap.js',
+        'node_modules/babel-polyfill/dist/polyfill.js',
+        'javascript/**/*.js',
+        'test/mocha/helpers.js',
+        'test/mocha/assets.js',
+        //'test/mocha/specs/**/*.spec.js'
+        //'test/mocha/specs/unit/**/*.spec.js'
+        'test/mocha/specs/integration/**/*.spec.js',
+        //'test/mocha/specs/feature/app.spec.js',
+        //'test/mocha/specs/feature/day.spec.js',
+        //'test/mocha/specs/feature/hour.spec.js',
+        {
+            pattern: 'css/*',
+            included: false
+        },
+        {
+            pattern: 'node_modules/d3/d3.js',
+            included: false
+        },
+        {
+            pattern: 'node_modules/bootstrap/dist/fonts/*',
+            included: false
+        }
     ],
 
     // list of files to exclude
@@ -39,6 +57,7 @@ module.exports = function(config) {
 
     preprocessors: {
         "javascript/**/*.js": ["browserify"],
+        "test/mocha/helpers.js": ["browserify"],
         "test/mocha/specs/**/*.spec.js": ["browserify"]
     },
 
@@ -79,6 +98,9 @@ module.exports = function(config) {
     // if true, Karma captures browsers, runs the tests and exits
     //singleRun: false,
     singleRun: true,
+
+    browserDisconnectTimeout: 100000,
+    browserNoActivityTimeout: 100000,
 
     // Concurrency level
     // how many browser should be started simultaneous
