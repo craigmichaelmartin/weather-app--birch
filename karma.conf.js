@@ -22,28 +22,19 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         'node_modules/jquery/dist/jquery.js',
+        'node_modules/underscore/underscore.js',
+        'node_modules/es5-shim/es5-shim.js',
+        'node_modules/bootstrap/dist/js/bootstrap.js',
+        'node_modules/babel-polyfill/dist/polyfill.js',
+        'node_modules/d3/d3.js',
+        'test/mocha/assets.js',
+        'css/app.css',
+        'javascript/main.js',
+        'test/mocha/helpers.js',
         'node_modules/mocha/mocha.js',
         'node_modules/sinon/pkg/sinon.js',
         'node_modules/chai/chai.js',
-        'node_modules/bootstrap/dist/js/bootstrap.js',
-        'node_modules/babel-polyfill/dist/polyfill.js',
-        'javascript/**/*.js',
-        'test/mocha/helpers.js',
-        'test/mocha/assets.js',
-        //'test/mocha/specs/**/*.spec.js'
-        //'test/mocha/specs/unit/**/*.spec.js'
-        'test/mocha/specs/integration/**/*.spec.js',
-        //'test/mocha/specs/feature/app.spec.js',
-        //'test/mocha/specs/feature/day.spec.js',
-        //'test/mocha/specs/feature/hour.spec.js',
-        {
-            pattern: 'css/*',
-            included: false
-        },
-        {
-            pattern: 'node_modules/d3/d3.js',
-            included: false
-        },
+        'test/mocha/specs/**/*.spec.js',
         {
             pattern: 'node_modules/bootstrap/dist/fonts/*',
             included: false
@@ -56,7 +47,7 @@ module.exports = function(config) {
     ],
 
     preprocessors: {
-        "javascript/**/*.js": ["browserify"],
+        "javascript/main.js": ["browserify"],
         "test/mocha/helpers.js": ["browserify"],
         "test/mocha/specs/**/*.spec.js": ["browserify"]
     },

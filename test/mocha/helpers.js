@@ -3,6 +3,7 @@ import AppState from '../../javascript/models/app';
 import DaysCollection from '../../javascript/collections/days';
 import HoursCollection from '../../javascript/collections/hours';
 import sinon from 'sinon';
+import $ from 'jquery';
 
 const fixtures = {
     dailyGeo: require('./fixtures/nonspecific_forecast10day.json'),
@@ -46,8 +47,15 @@ const createApp = function () {
     });
 };
 
+const domEvent = function(eventType, el) {
+    const ev = document.createEvent('HTMLEvents');
+    ev.initEvent(eventType, true, true);
+    el.dispatchEvent(ev);
+};
+
 export {
     fixtures,
     createServer,
-    createApp
+    createApp,
+    domEvent
 };
