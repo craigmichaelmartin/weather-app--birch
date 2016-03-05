@@ -1,7 +1,6 @@
 import { getDateSentence }  from '../../../../../javascript/util/date.js';
 //import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import sinon from 'sinon';
 
 describe('Date util', function () {
 

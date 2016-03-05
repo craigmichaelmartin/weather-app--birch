@@ -1,6 +1,5 @@
 import { getScaledLength, inchesToCentimeters, inchesToMillimeters }  from '../../../../../javascript/util/length.js';
 import { expect } from 'chai';
-import sinon from 'sinon';
 
 describe('Length util', function () {
 

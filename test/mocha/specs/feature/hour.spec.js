@@ -1,6 +1,7 @@
 import { createServer, createApp, domEvent } from '../../helpers';
 //import { describe, it } from 'mocha';
 import { expect } from 'chai';
+import $ from 'jquery';
 import sinon from 'sinon';
 
 describe('App after loading', function () {

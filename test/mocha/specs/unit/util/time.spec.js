@@ -1,6 +1,5 @@
 import { get12HourNotation, get24HourNotation } from '../../../../../javascript/util/time.js';
 import { expect } from 'chai';
-import sinon from 'sinon';
 
 describe('Time util', function () {
 

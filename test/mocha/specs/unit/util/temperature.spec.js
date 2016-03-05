@@ -1,6 +1,5 @@
 import { getScaledTemperature } from '../../../../../javascript/util/temperature.js';
 import { expect } from 'chai';
-import sinon from 'sinon';
 
 describe('get temperature', function () {
 

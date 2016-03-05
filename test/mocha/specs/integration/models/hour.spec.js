@@ -1,7 +1,6 @@
 import HourModel from '../../../../../javascript/models/hour.js';
 //import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import sinon from 'sinon';
 
 const hourlyGeo = require('../../../fixtures/nonspecific_hourly10day.json');
 

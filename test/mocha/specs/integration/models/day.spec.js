@@ -1,7 +1,6 @@
 import DayModel from '../../../../../javascript/models/day.js';
 //import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import sinon from 'sinon';
 
 const dailyGeo = require('../../../fixtures/nonspecific_forecast10day.json');
 

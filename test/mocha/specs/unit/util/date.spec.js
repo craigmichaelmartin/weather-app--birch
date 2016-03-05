@@ -1,6 +1,5 @@
 import { getDeltaDate, getScaledShortDate }  from '../../../../../javascript/util/date.js';
 import { expect } from 'chai';
-import sinon from 'sinon';
 
 describe('Date util', function () {
 

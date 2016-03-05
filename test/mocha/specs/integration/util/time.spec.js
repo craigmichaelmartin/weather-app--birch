@@ -1,7 +1,6 @@
 import { getScaledTime } from '../../../../../javascript/util/time.js';
 //import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import sinon from 'sinon';
 
 describe('Time util', function () {
 
