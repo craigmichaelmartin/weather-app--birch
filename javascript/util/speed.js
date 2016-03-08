@@ -1,7 +1,6 @@
-var mphToKph = 1.609344;
+const mphToKph = 1.609344;
 
-var getScaledSpeed = function (scale, englishNumber, options) {
-    options || (options = {});
+const getScaledSpeed = function (scale, englishNumber, options = {}) {
     options.toFixed || (options.toFixed = 0);
     if (scale === 'metric') {
         return (+englishNumber * mphToKph).toFixed(options.toFixed);
@@ -9,11 +8,12 @@ var getScaledSpeed = function (scale, englishNumber, options) {
     return (+englishNumber).toFixed(options.toFixed);
 };
 
-var getScaledSpeedUnit = function (scale, englishNumber, options) {
+const getScaledSpeedUnit = function (scale, englishNumber, options) {
     if (englishNumber === void 0) {
         return 'unavailable';
     }
-    return getScaledSpeed(scale, englishNumber, options) + (scale === 'metric' ? 'kph' : 'mph');
+    const speed = getScaledSpeed(scale, englishNumber, options);
+    return speed + (scale === 'metric' ? 'kph' : 'mph');
 };
 
 export {

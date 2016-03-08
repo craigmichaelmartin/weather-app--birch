@@ -1,5 +1,5 @@
 import View from '../views/view';
-import { getScaledTemperatureDegree } from '../util/temperature';
+import {getScaledTemperatureDegree} from '../util/temperature';
 import $ from 'jquery';
 import _ from 'underscore';
 

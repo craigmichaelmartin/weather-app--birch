@@ -11,7 +11,8 @@ class Days extends Collection {
         // I would rather not get the full hourly forcast for all 10 days,
         // and instead as needed, but the rate limit and api design push me toward this path.
         // If no zip is provided, use the ip and return geolookup info as well.
-        return 'http://api.wunderground.com/api/3f6df2a3f0916b99/' + (zip ? '' : 'geolookup/') + 'forecast10day/q/' + (zip || 'autoip') + '.json';
+        const end = `${zip ? '' : 'geolookup/'}forecast10day/q/${zip || 'autoip'}.json`;
+        return `http://api.wunderground.com/api/3f6df2a3f0916b99/${end}`;
     }
 
     fetch(options) {

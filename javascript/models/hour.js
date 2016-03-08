@@ -13,15 +13,14 @@ class Hour extends Model {
     }
 
     defaults() {
-        var defaults = {};
-        this.defaultKeys.forEach(function (key) {
+        const defaults = {};
+        this.defaultKeys.forEach((key) => {
             defaults[key] = void 0;
         });
         return defaults;
     }
 
     parse(results) {
-        // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
         return _.mapObject({
             monthname: results.FCTTIME.month_name,
             weekday: results.FCTTIME.weekday_name,
@@ -39,13 +38,12 @@ class Hour extends Model {
             windDirection: results.wdir.dir,
             windSpeed: results.wspd.english,
             precipitation: results.qpf.english
-        }, function (val) {
+        }, (val) => {
             if (val === '-9999' || val === '-999') {
                 return void 0;
             }
             return val;
         });
-        // jscs:enabled requireCamelCaseOrUpperCaseIdentifiers
     }
 
 }

@@ -1,27 +1,29 @@
-import { getScaledTime } from './time';
+import {getScaledTime} from './time';
 
-var getDeltaDate = function (date, delta) {
-    var dateClone = new Date(date);
+const getDeltaDate = function (date, delta) {
+    const dateClone = new Date(date);
     dateClone.setDate(date.getDate() + delta);
     return dateClone;
 };
 
-var getScaledShortDate = function (scale, month, day) {
+const getScaledShortDate = function (scale, month, day) {
     if (scale === 'english') {
-        return month + '/' + day;
+        return `${month}/${day}`;
     }
     if (scale === 'metric') {
-        return day + '/' + month;
+        return `${day}/${month}`;
     }
-    throw 'Cannot convert to scale "' + scale + '"';
+    throw new Error(`Cannot convert to scale "${scale}"`);
 };
 
-var getDateSentence = function (scale, weekday, monthname, day, hour) {
-    return weekday + ', ' + (scale === 'metric' ? day + ' ' + monthname : monthname + ' ' + day) + (hour == null ? '' : ' at ' + getScaledTime(scale, hour));
+const getDateSentence = function (scale, weekday, monthname, day, hour) {
+    const date = scale === 'metric' ? `${day} ${monthname}` : `${monthname} ${day}`;
+    const time = hour == null ? '' : ` at ${getScaledTime(scale, hour)}`;
+    return `${weekday}, ${date}${time}`;
 };
 
 export {
-    getDeltaDate, 
+    getDeltaDate,
     getScaledShortDate,
     getDateSentence
 };

@@ -1,5 +1,5 @@
 import View from '../views/view';
-import { getScaledTemperatureDegreeUnit } from '../util/temperature';
+import {getScaledTemperatureDegreeUnit} from '../util/temperature';
 import _ from 'underscore';
 
 const fs = require('fs');
@@ -20,8 +20,7 @@ class LocationView extends View {
         };
     }
 
-    initialize(options) {
-        options = options || {};
+    initialize(options = {}) {
         this.model = options.appState;
         this.currentHour = options.currentHour;
         this.render();
@@ -35,11 +34,11 @@ class LocationView extends View {
         this.$('.js-spinner').show();
     }
 
-    flagInvalidZip(e) {
+    flagInvalidZip() {
         this.$edit.addClass('is-invalid');
     }
 
-    flagValidZip(e) {
+    flagValidZip() {
         this.$edit.removeClass('is-invalid');
     }
 
@@ -50,20 +49,20 @@ class LocationView extends View {
     }
 
     updateZipOrCancel() {
-        var zip = +this.$edit.val();
+        const zip = +this.$edit.val();
         if (zip === this.model.get('zip')) {
             this.render();
         }
-        if (!this.model.set({zip: zip}, {validate: true})) {
+        if (!this.model.set({zip}, {validate: true})) {
             this.render();
         }
     }
 
     validateZip() {
-        if (!this.model.validate({zip: +this.$edit.val()})) {
-            this.flagValidZip();
-        } else {
+        if (this.model.validate({zip: +this.$edit.val()})) {
             this.flagInvalidZip();
+        } else {
+            this.flagValidZip();
         }
     }
 

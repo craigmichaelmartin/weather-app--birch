@@ -5,18 +5,18 @@ import Days from './collections/days';
 import Hours from './collections/hours';
 import Backbone from 'backbone';
 import $ from 'jquery';
-import es from 'es5-shim';
-import bootstrap from 'bootstrap';
+import 'es5-shim';
+import 'bootstrap';
 
-$.ajaxSetup({ cache: false });
+$.ajaxSetup({cache: false});
 
-var appState = new AppState();
-var appRouter = new AppRouter({appState: appState}); // jshint ignore:line
-var app = new AppView({
+const appState = new AppState();
+const appRouter = new AppRouter({appState: appState}); // jshint ignore:line
+const app = new AppView({
     el: $('.js-weatherApp'),
     days: new Days(),
     hours: new Hours(),
-    appState: appState
+    appState
 });
-Backbone.history.start({/*pushState: true*/});
+Backbone.history.start({/* pushState: true */});
 app.fetchForecastData();

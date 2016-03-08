@@ -1,6 +1,6 @@
 import View from '../views/view';
-import { getScaledTemperature } from '../util/temperature';
-import { getScaledTime }  from '../util/time';
+import {getScaledTemperature} from '../util/temperature';
+import {getScaledTime} from '../util/time';
 import _ from 'underscore';
 import $ from 'jquery';
 import d3 from 'd3';
@@ -21,8 +21,7 @@ class ChartView extends View {
         };
     }
 
-    initialize(options) {
-        options = options || {};
+    initialize(options = {}) {
         this.appState = options.appState;
         this.hours = options.hours;
         this.listenTo(this.appState, 'dataReady', this.render);
@@ -32,14 +31,14 @@ class ChartView extends View {
     }
 
     hourClicked(e) {
-        var time = $(e.currentTarget).data('time');
-        var el = e.currentTarget;
+        const time = $(e.currentTarget).data('time');
+        const el = e.currentTarget;
         return this.makeHourActive(time, el);
     }
 
     hourTextClicked(e) {
-        var time = $(e.currentTarget).data('time');
-        var el = $('[data-time=\'' + time + '\']')[0];
+        const time = $(e.currentTarget).data('time');
+        const el = $(`[data-time="${time}"]`)[0];
         return this.makeHourActive(time, el);
     }
 
@@ -50,92 +49,72 @@ class ChartView extends View {
     }
 
     afterRender() {
+        const getTime = (d) => d.time;
+        const getPresentationTime = (d) => getScaledTime(this.appState.get('scale'), d.time, {hideMinutes: true});
+        const getAbsTemp = (d) => Math.abs(d.temp);
+        const getPresentationTemp = (d) => `${getScaledTemperature(this.appState.get('scale'), d.temp)}°`;
 
-        var getTime = function (d) {
-            return d.time;
-        };
-        var getPresentationTime = function (d) {
-            return getScaledTime(this.appState.get('scale'), d.time, {hideMinutes: true});
-        };
-        var getAbsTemp = function (d) {
-            return Math.abs(d.temp);
-        };
-        var getPresentationTemp = function (d) {
-            return getScaledTemperature(this.appState.get('scale'), d.temp) + '°';
-        };
-
-        var margin = {
+        const margin = {
             upper: 0,
             right: 0,
             bottom: 100,
             left: 0
         };
-        var width = $('.js-d3Chart').width() - margin.left - margin.right;
-        var height = $('.js-d3Chart').height() - margin.upper - margin.bottom;
+        const width = $('.js-d3Chart').width() - margin.left - margin.right;
+        const height = $('.js-d3Chart').height() - margin.upper - margin.bottom;
 
-        var x = d3.scale.ordinal()
+        const x = d3.scale.ordinal()
             .rangeRoundBands([0, width], 0.1);
 
-        var y = d3.scale.linear()
+        const y = d3.scale.linear()
             .range([height, 0]);
 
-        var xAxis = d3.svg.axis()
+        const xAxis = d3.svg.axis()
             .scale(x)
             .orient('bottom');
 
-        var svg = d3.select('.js-d3Chart')
+        const svg = d3.select('.js-d3Chart')
             .append('div')
             .classed('svg-container', true)
             .append('svg')
             .attr('preserveAspectRatio', 'xMinYMin meet')
-            .attr('viewBox', '0 0 ' + (width + margin.left + margin.right) + ' ' + (height + margin.upper + margin.bottom))
+            .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.upper + margin.bottom}`)
             .classed('svg-content-responsive', true)
             .append('g')
-            .attr('transform', 'translate(' + margin.left + ',' + margin.upper + ')');
+            .attr('transform', `translate(${margin.left},${margin.upper})`);
 
-        var data = this.hours.byDay(this.appState.get('day')).map((function (model) {
-            return {
-                temp: model.get('temperature'),
-                time: model.get('hour')
-            };
-        }).bind(this));
+        const data = this.hours.byDay(this.appState.get('day')).map((model) => ({
+            temp: model.get('temperature'),
+            time: model.get('hour')
+        }));
 
         x.domain(data.map(getTime));
         y.domain([0, d3.max(data, getAbsTemp)]);
 
-        var self = this;
+        const that = this;
         xAxis.tickValues(
-            data.map(function (d,i) {
+            data.map((d, i) => {
                 if (i % 4 === 0) {
                     return d.time;
                 }
-            }).filter(function (d) {
-                return d !== void 0;
-            })
+                return void 0;
+            }).filter((d) => d !== void 0)
         );
-        xAxis.tickFormat(function (d) {
-            return getScaledTime(self.appState.get('scale'), d, {hideMinutes: true});
-        });
+        xAxis.tickFormat((d) => getScaledTime(that.appState.get('scale'), d, {hideMinutes: true}));
 
         svg.append('g')
             .attr('class', 'x axis')
-            .attr('transform', 'translate(0,' + height + ')')
+            .attr('transform', `translate(0,${height})`)
             .call(xAxis);
 
         svg.selectAll()
             .data(data)
             .enter().append('rect')
             .attr('class', 'js-hourBar hourBar')
-            .attr('x', function (d, i) {
-                return i * (width / data.length);
-            })
+            .attr('x', (d, i) => i * (width / data.length))
             .attr('width', x.rangeBand())
-            .attr('y', function (d) {
-                return y(d.temp);
-            })
-            .attr('height', function (d) {
-                return height - y(d.temp);
-            })
+            .attr('y', (d) => y(d.temp))
+            .attr('height', (d) => height - y(d.temp))
             .attr('data-time', getTime);
 
         svg.selectAll()
@@ -143,12 +122,8 @@ class ChartView extends View {
             .enter()
             .append('text')
             .attr('class', 'hourText js-hourTemperature js-hourText')
-            .attr('x', function (d, i) {
-                return ((i * width / data.length) + (width / data.length / 2) - 3);
-            })
-            .attr('y', function (d, i) {
-                return y(d.temp) + 25;
-            })
+            .attr('x', (d, i) => (i * width / data.length) + (width / data.length / 2) - 3)
+            .attr('y', (d) => y(d.temp) + 25)
             .attr('data-time', getTime)
             .text(getPresentationTemp.bind(this));
 
@@ -159,20 +134,17 @@ class ChartView extends View {
             .attr('class', 'hourText js-hourTime js-hourText')
             .attr('font-family', 'sans-serif')
             .attr('font-size', '16px')
-            .attr('x', function (d, i) {
-                return ((i * width / data.length) + (width / data.length / 2) - 3);
-            })
-            .attr('y', function (d, i) {
-                return y(d.temp) + 50;
-            })
+            .attr('x', (d, i) => (i * width / data.length) + (width / data.length / 2) - 3)
+            .attr('y', (d) => y(d.temp) + 50)
             .attr('data-time', getTime)
             .text(getPresentationTime.bind(this));
 
-        var ratioPercentage = height / width * 110;
-        $('.svg-container').css('padding-bottom', ratioPercentage + '%');
+        const ratioPercentage = height / width * 110;
+        $('.svg-container').css('padding-bottom', `${ratioPercentage}%`);
         if ($.isNumeric(this.appState.get('hour'))) {
-            var time = this.appState.get('hour');
+            const time = this.appState.get('hour');
             $('.js-hourBar[data-time=\'' + time + '\']')[0].setAttribute('class', 'js-hourBar hourBar is-active');
+            $(`.js-hourBar[data-time="${time}"]`)[0].setAttribute('class', 'js-hourBar hourBar is-active');
         }
     }
 }

@@ -7,12 +7,11 @@ import ChartView from './components/chart';
 import AppAlert from './components/alert';
 import $ from 'jquery';
 import _ from 'underscore';
-import bootstrap from 'bootstrap';
-import es from 'es5-shim';
+import 'bootstrap';
+import 'es5-shim';
 
 const fs = require('fs');
 const template = fs.readFileSync(__dirname + '/templates/app.html', 'utf8');
-
 
 class AppView extends View {
 
@@ -20,8 +19,7 @@ class AppView extends View {
         return _.template(template);
     }
 
-    initialize(options) {
-        options = options || {};
+    initialize(options = {}) {
         this.appState = options.appState;
         this.render();
         this.days = options.days;
@@ -38,9 +36,7 @@ class AppView extends View {
         $.when(
             this.days.fetch(this.appState.attributes),
             this.hours.fetch(this.appState.attributes)
-        ).done((function () {
-            this.appState.trigger('dataReady');
-        }).bind(this));
+        ).done(() => this.appState.trigger('dataReady'));
     }
 
     // If no zip is provided, obtain the zip from the ip geo-lookup.
@@ -76,12 +72,17 @@ class AppView extends View {
         return 'is-cloudy';
     }
 
-    appStateInvalid(model, errors, options) {
-        this.appState.set(_.defaults({zip: this.appState.get('zip')}, _.result(this.appState, 'defaults')));
-        var appAlert = new AppAlert({ // jshint ignore:line
+    appStateInvalid(model, errors) {
+        const defaults = _.defaults(
+            {zip: this.appState.get('zip')},
+            _.result(this.appState, 'defaults')
+        );
+        this.appState.set(defaults);
+        const appAlert = new AppAlert({
             el: '.js-alerts',
-            errors: errors
+            errors
         });
+        appAlert.render();
     }
 
     // Kicks off the views that comprise the app.
@@ -112,7 +113,6 @@ class AppView extends View {
             hours: this.hours
         });
     }
-
 }
 
 export default AppView;

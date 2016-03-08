@@ -11,13 +11,11 @@ class AlertView extends View {
     }
 
     getMessage(errors) {
-        return 'The data provided was invalid. ' + errors.join('. ') + '.';
+        return `The data provided was invalid. ${errors.join('. ')} .`;
     }
 
-    initialize(options) {
-        options = options || {};
+    initialize(options = {}) {
         this.errors = options.errors;
-        this.render();
     }
 
     getTemplateData() {

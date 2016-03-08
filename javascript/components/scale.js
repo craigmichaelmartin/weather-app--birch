@@ -17,8 +17,7 @@ class ScaleView extends View {
         };
     }
 
-    initialize(options) {
-        options = options || {};
+    initialize(options = {}) {
         this.model = options.appState;
         this.render();
     }

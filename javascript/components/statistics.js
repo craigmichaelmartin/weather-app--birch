@@ -1,8 +1,8 @@
 import View from '../views/view';
-import { getScaledTemperatureDegreeUnit } from '../util/temperature';
-import { getDateSentence } from '../util/date';
-import { getScaledLength } from '../util/length';
-import { getScaledSpeedUnit } from '../util/speed';
+import {getScaledTemperatureDegreeUnit} from '../util/temperature';
+import {getDateSentence} from '../util/date';
+import {getScaledLength} from '../util/length';
+import {getScaledSpeedUnit} from '../util/speed';
 import _ from 'underscore';
 
 const fs = require('fs');
@@ -11,8 +11,7 @@ const hourTemplate = fs.readFileSync(__dirname + '/../templates/hour_statistics.
 
 class StatisticsView extends View {
 
-    initialize(options) {
-        options = options || {};
+    initialize(options = {}) {
         this.appState = options.appState;
         this.hours = options.hours;
         this.days = options.days;
@@ -40,11 +39,11 @@ class StatisticsView extends View {
     }
 
     getTemplateData() {
-        const { weekday, monthname, day, hour, low, high, temperature,
-                feelsLike, dewPoint, heatIndex, totalSnow, averageWind,
-                windSpeed, windDirection, averageWindDirection,
-                precipitation } = this.model.attributes;
-        const { scale } = this.appState.attributes;
+        const {weekday, monthname, day, hour, low, high, temperature,
+               feelsLike, dewPoint, heatIndex, totalSnow, averageWind,
+               windSpeed, windDirection, averageWindDirection,
+               precipitation} = this.model.attributes;
+        const {scale} = this.appState.attributes;
         return _.extend({}, this.model.attributes, this.appState.attributes, {
             headerText: getDateSentence(scale, weekday, monthname, day, hour),
             highTemp: getScaledTemperatureDegreeUnit(scale, high),
@@ -56,7 +55,7 @@ class StatisticsView extends View {
             snow: getScaledLength(scale, totalSnow),
             windSpeed: getScaledSpeedUnit(scale, averageWind || windSpeed),
             windDirection: averageWindDirection || windDirection,
-            precipitation: getScaledLength(scale, precipitation),
+            precipitation: getScaledLength(scale, precipitation)
         });
     }
 

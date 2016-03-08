@@ -1,5 +1,5 @@
-import { getScaledShortDate } from './util/date';
-import { getScaledTime } from './util/time';
+import {getScaledShortDate} from './util/date';
+import {getScaledTime} from './util/time';
 import $ from 'jquery';
 import Backbone from 'backbone';
 
@@ -37,25 +37,26 @@ class AppRouter extends Backbone.Router {
     }
 
     getUrl() {
-        return '' + this.appState.get('zip') +
-                '/' + this.appState.get('day') +
-                (this.appState.get('hour') === void 0 ? '' : ('/' + this.appState.get('hour'))) +
-                '/' + this.appState.get('scale');
+        return `${this.appState.get('zip')}` +
+               `/${this.appState.get('day')}` +
+               `${this.appState.get('hour') === void 0 ? '' : `/${this.appState.get('hour')}`}` +
+               `/${this.appState.get('scale')}`;
     }
 
     getTitle() {
-        var now = new Date();
-        var month = now.getMonth() + 1;
-        var day = now.getDate();
-        var appStateDay = this.appState.get('day');
-        if (appStateDay < day) {
-            month = month + 1;
-        }
-        var baseTitle = 'Weather for ' + this.appState.get('zip');
-        var scale = this.appState.get('scale');
-        var dateTitle = ' on ' + getScaledShortDate(scale, month, appStateDay);
-        var hour = this.appState.get('hour');
-        var hourTitle = (hour === void 0) ? '' : ' at ' + getScaledTime(scale, hour);
+        const now = new Date();
+        const appStateDay = this.appState.get('day');
+        const day = now.getDate();
+        const month = appStateDay < day
+            ? now.getMonth() + 2
+            : now.getMonth() + 1;
+        const baseTitle = `Weather for ${this.appState.get('zip')}`;
+        const scale = this.appState.get('scale');
+        const dateTitle = ` on ${getScaledShortDate(scale, month, appStateDay)}`;
+        const hour = this.appState.get('hour');
+        const hourTitle = hour === void 0
+            ? ''
+            : ` at ${getScaledTime(scale, hour)}`;
         return baseTitle + dateTitle + hourTitle;
     }
 

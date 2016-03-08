@@ -75,6 +75,7 @@
     "watch": "npm run watch-es6 && npm run watch-less",
     "build": "npm run build-less && npm run build-es6",
     "test": "karma start karma.conf.js",
+    "lint": "eslint javascript/**",
     "dist": "npm run clean-built-dirs && npm run make-static-dirs && npm run build",
     "setup-project": "npm run clean-installed-dirs && npm install && bower install",
     "setup": "npm run setup-project && npm run dist"

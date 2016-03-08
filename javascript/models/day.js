@@ -4,7 +4,7 @@ import _ from 'underscore';
 class Day extends Model {
 
     get defaultKeys() {
-        return  [
+        return [
             'condition', 'iconUrl', 'iconAlt', 'high', 'low', 'monthname',
             'weekday', 'weekdayShort', 'day', 'totalSnow', 'averageHumidity',
             'averageWindDirection', 'averageWind', 'precipitation'
@@ -12,19 +12,18 @@ class Day extends Model {
     }
 
     defaults() {
-        var defaults = {};
-        this.defaultKeys.forEach(function (key) {
+        const defaults = {};
+        this.defaultKeys.forEach((key) => {
             defaults[key] = void 0;
         });
         return defaults;
     }
 
     buildUrl(zip) {
-        return 'http://api.wunderground.com/api/3f6df2a3f0916b99/hourly/q/' + (zip || 'autoip') + '.json';
+        return `http://api.wunderground.com/api/3f6df2a3f0916b99/hourly/q/${zip || 'autoip'}.json`;
     }
 
     parse(results) {
-        // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
         return _.mapObject({
             condition: results.conditions,
             iconUrl: results.icon_url,
@@ -40,13 +39,12 @@ class Day extends Model {
             averageWindDirection: results.avewind.dir,
             averageWind: results.avewind.mph,
             precipitation: results.qpf_allday.in
-        }, function (val) {
+        }, (val) => {
             if (val === '-9999' || val === '-999') {
                 return void 0;
             }
             return val;
         });
-        // jscs:enabled requireCamelCaseOrUpperCaseIdentifiers
     }
 
 }

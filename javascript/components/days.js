@@ -1,6 +1,5 @@
 import View from '../views/view';
 import DayView from './day';
-import _ from 'underscore';
 
 class DaysView extends View {
 
@@ -29,7 +28,7 @@ class DaysView extends View {
     }
 
     assignOne(day) {
-        var view = new DayView({
+        const view = new DayView({
             model: day,
             appState: this.appState
         });

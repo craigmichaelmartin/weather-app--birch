@@ -1,5 +1,4 @@
-var getScaledTemperature = function (scale, englishNumber, options) {
-    options || (options = {});
+const getScaledTemperature = function (scale, englishNumber, options = {}) {
     options.toFixed || (options.toFixed = 0);
     if (scale === 'english') {
         return (+englishNumber).toFixed(options.toFixed);
@@ -7,18 +6,20 @@ var getScaledTemperature = function (scale, englishNumber, options) {
     if (scale === 'metric') {
         return ((englishNumber - 32) * 5 / 9).toFixed(options.toFixed);
     }
-    throw 'Cannot convert to scale "' + scale + '"';
+    throw new Error(`Cannot convert to scale "${scale}"`);
 };
 
-var getScaledTemperatureDegree = function (scale, englishNumber, options) {
-    return getScaledTemperature(scale, englishNumber, options) + '&deg;';
+const getScaledTemperatureDegree = function (scale, englishNumber, options) {
+    const temperature = getScaledTemperature(scale, englishNumber, options);
+    return `${temperature}&deg;`;
 };
 
-var getScaledTemperatureDegreeUnit = function (scale, englishNumber, options) {
+const getScaledTemperatureDegreeUnit = function (scale, englishNumber, options) {
     if (englishNumber === void 0) {
         return 'unavailable';
     }
-    return getScaledTemperatureDegree(scale, englishNumber, options) + (scale === 'metric' ? 'C' : 'F');
+    const temperature = getScaledTemperatureDegree(scale, englishNumber, options);
+    return temperature + (scale === 'metric' ? 'C' : 'F');
 };
 
 export {
