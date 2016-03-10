@@ -1,70 +1,58 @@
-import { createServer, createApp, domEvent } from '../../helpers';
-import { getScaledTemperature } from '../../../../javascript/util/temperature';
-//import { describe, it } from 'mocha';
-import { expect } from 'chai';
+import {createServer, createApp, domEvent} from '../../helpers';
+import {getScaledTemperature} from '../../../../javascript/util/temperature';
+// import { describe, it } from 'mocha';
+import {expect} from 'chai';
 import $ from 'jquery';
 import sinon from 'sinon';
 
-describe('App after loading', function () {
-
-    beforeEach(function () {
-        this.clock = sinon.useFakeTimers(new Date(2015, 10, 25, 12).getTime());
-        this.server = createServer();
-        this.app = createApp();
-        this.app.fetchForecastData();
-        this.server.respond();
+describe('App after loading', () => {
+    let clock, server, app;
+    beforeEach(() => {
+        clock = sinon.useFakeTimers(new Date(2015, 10, 25, 12).getTime());
+        server = createServer();
+        app = createApp();
+        app.fetchForecastData();
+        server.respond();
     });
-
-    afterEach(function () {
-        this.clock.restore();
-        this.server.restore();
+    afterEach(() => {
+        clock.restore();
+        server.restore();
     });
-
-    describe('interacting with the scale', function () {
-
-        describe('specifically metric', function () {
-
-            beforeEach(function () {
-                this.$metric = $('.js-metric');
-                domEvent('click', this.$metric[0]);
+    describe('interacting with the scale', () => {
+        describe('specifically metric', () => {
+            let $metric;
+            beforeEach(() => {
+                $metric = $('.js-metric');
+                domEvent('click', $metric[0]);
             });
-
-            it('should add the active class to it', function () {
-                expect(this.$metric.hasClass('active')).to.be.true;
+            it('should add the active class to it', () => {
+                expect($metric.hasClass('active')).to.be.true;
             });
-
-            it('should result in only one active class', function () {
+            it('should result in only one active class', () => {
                 expect($('.scale-button.active').length).to.equal(1);
             });
-
-            it('should change the day\'s temperatures to metric', function () {
-                var test = $('.js-dayHighTemperature').first().text();
-                var actual = getScaledTemperature('metric', this.app.days.models[0].get('high')) + '°';
+            it('should change the day\'s temperatures to metric', () => {
+                const test = $('.js-dayHighTemperature').first().text();
+                const actual = getScaledTemperature('metric', app.days.models[0].get('high')) + '°';
                 expect(test).to.equal(actual);
             });
-
-            it('should change the hours temperatures to metric', function () {
-                var test = $('.js-hourTemperature').first().text();
-                var actual = getScaledTemperature('metric', this.app.hours.byDay(this.app.appState.get('day')).models[0].get('temperature')) + '°';
+            it('should change the hours temperatures to metric', () => {
+                const test = $('.js-hourTemperature').first().text();
+                const actual = getScaledTemperature('metric', app.hours.byDay(app.appState.get('day')).models[0].get('temperature')) + '°';
                 expect(test).to.equal(actual);
             });
-
-            it('should change the day statistics temperatures to metric', function () {
-                var test = $('.js-dayStatisticsHigh').text();
-                var day = this.app.days.findWhere({day: this.app.appState.get('day')});
-                var actual = getScaledTemperature('metric', day.get('high')) + '°C';
+            it('should change the day statistics temperatures to metric', () => {
+                const test = $('.js-dayStatisticsHigh').text();
+                const day = app.days.findWhere({day: app.appState.get('day')});
+                const actual = getScaledTemperature('metric', day.get('high')) + '°C';
                 expect(test).to.equal(actual);
             });
-
-            it('should change the hour statistics temperatures to metric', function () {
+            it('should change the hour statistics temperatures to metric', () => {
                 domEvent('click', $('.js-hourBar').first()[0]);
-                var test = $('.js-hourStatisticsTemperature').text();
-                var actual = getScaledTemperature('metric', this.app.hours.byDay(this.app.appState.get('day')).models[0].get('temperature')) + '°C';
+                const test = $('.js-hourStatisticsTemperature').text();
+                const actual = getScaledTemperature('metric', app.hours.byDay(app.appState.get('day')).models[0].get('temperature')) + '°C';
                 expect(test).to.equal(actual);
             });
-
         });
-
     });
-
 });

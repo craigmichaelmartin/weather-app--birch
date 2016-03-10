@@ -6,8 +6,10 @@ import sinon from 'sinon';
 import $ from 'jquery';
 
 const fixtures = {
+    /* eslint-disable global-require */
     dailyGeo: require('./fixtures/nonspecific_forecast10day.json'),
-    hourlyGeo: require('./fixtures/nonspecific_hourly10day.json'),
+    hourlyGeo: require('./fixtures/nonspecific_hourly10day.json')
+    /* eslint-enable global-require */
 };
 
 const validResponse = function (responseText) {
@@ -19,7 +21,7 @@ const validResponse = function (responseText) {
 };
 
 const createServer = function () {
-    var server = sinon.fakeServer.create();
+    const server = sinon.fakeServer.create();
     server.respondWith(
         'GET',
         /api\.wunderground\.com\/api\/3f6df2a3f0916b99\/.*forecast10day\/q/,
@@ -38,10 +40,10 @@ const createApp = function () {
         hours: new HoursCollection(),
         days: new DaysCollection(),
         appState: new AppState({
-            zip: undefined,
-            day: undefined,
-            hour: undefined,
-            scale: undefined
+            zip: void 0,
+            day: void 0,
+            hour: void 0,
+            scale: void 0
         }),
         el: $('body')
     });

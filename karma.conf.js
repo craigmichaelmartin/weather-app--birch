@@ -49,6 +49,7 @@ module.exports = function(config) {
     preprocessors: {
         "javascript/main.js": ["browserify"],
         "test/mocha/helpers.js": ["browserify"],
+        "test/mocha/assets.js": ["browserify"],
         "test/mocha/specs/**/*.spec.js": ["browserify"]
     },
 
