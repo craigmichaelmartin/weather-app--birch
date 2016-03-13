@@ -62,7 +62,9 @@
     "node-sass": "~3.4.2",
     "font-awesome": "~4.5.0",
     "csscomb": "~3.1.8",
-    "csslint": "~0.10.0"
+    "csslint": "~0.10.0",
+    "postcss-cli": "~2.5.1",
+    "autoprefixer": "~6.3.3"
   },
   "scripts": {
     "demo": "npm run setup && npm run demo-server",
@@ -73,7 +75,7 @@
     "clean-built-dirs": "rm -rf weather-app--birch && rm -rf css && rm -rf compiledES6",
     "clean-installed-dirs": "rm -rf node_modules && rm -rf public",
     "watch-scss": "watch 'npm run build-scss' scss/",
-    "build-scss": "node-sass scss/main.scss css/app.css",
+    "build-scss": "node-sass scss/main.scss css/app.css && npm run autoprefixer",
     "watch-es6": "watchify -t babelify -t brfs javascript/main.js -o compiledES6/main.js -dv",
     "build-es6": "browserify javascript/main.js -dv | uglifyjs > compiledES6/main.js",
     "watch": "npm run watch-es6 && npm run watch-scss",
@@ -87,6 +89,7 @@
     "lint-tests": "eslint test/**",
     "lint-csscomb": "csscomb css/app.css",
     "lint-csslint": "csslint css/app.css",
+    "autoprefixer": "postcss --use autoprefixer css/app.css -o css/app.css",
     "dist": "npm run clean-built-dirs && npm run make-static-dirs && npm run build",
     "setup-project": "npm run clean-installed-dirs && npm install && bower install",
     "setup": "npm run setup-project && npm run dist"
