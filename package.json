@@ -61,7 +61,8 @@
     "babel-preset-es2015": "~6.5.0",
     "node-sass": "~3.4.2",
     "font-awesome": "~4.5.0",
-    "csscomb": "~3.1.8"
+    "csscomb": "~3.1.8",
+    "csslint": "~0.10.0"
   },
   "scripts": {
     "demo": "npm run setup && npm run demo-server",
@@ -80,11 +81,12 @@
     "karma": "karma start karma.conf.js",
     "test": "npm run lint && npm run karma",
     "test-lightning": "npm run lint & npm run karma",
-    "lint": "npm run lint-app && npm run lint-tests",
-    "lint-lightning": "npm run lint-app & npm run lint-tests",
+    "lint": "npm run lint-app && npm run lint-tests && npm run lint-csscomb",
+    "lint-lightning": "npm run lint-app & npm run lint-tests $ npm run lint-csscomb",
     "lint-app": "eslint javascript/**",
     "lint-tests": "eslint test/**",
-    "lint-css": "csscomb css/app.css",
+    "lint-csscomb": "csscomb css/app.css",
+    "lint-csslint": "csslint css/app.css",
     "dist": "npm run clean-built-dirs && npm run make-static-dirs && npm run build",
     "setup-project": "npm run clean-installed-dirs && npm install && bower install",
     "setup": "npm run setup-project && npm run dist"
