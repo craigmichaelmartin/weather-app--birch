@@ -60,7 +60,8 @@
     "karma-browserify": "v5.0.1",
     "babel-preset-es2015": "~6.5.0",
     "node-sass": "~3.4.2",
-    "font-awesome": "~4.5.0"
+    "font-awesome": "~4.5.0",
+    "csscomb": "~3.1.8"
   },
   "scripts": {
     "demo": "npm run setup && npm run demo-server",
@@ -83,6 +84,7 @@
     "lint-lightning": "npm run lint-app & npm run lint-tests",
     "lint-app": "eslint javascript/**",
     "lint-tests": "eslint test/**",
+    "lint-css": "csscomb css/app.css",
     "dist": "npm run clean-built-dirs && npm run make-static-dirs && npm run build",
     "setup-project": "npm run clean-installed-dirs && npm install && bower install",
     "setup": "npm run setup-project && npm run dist"
