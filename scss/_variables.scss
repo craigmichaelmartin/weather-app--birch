@@ -1,0 +1,22 @@
+$icon-font-path:                "../node_modules/font-awesome/fonts/";
+$fa-font-path:                  "../node_modules/font-awesome/fonts/";
+
+$primary:                       rgb(87, 183, 223);
+$primary--transparent:          rgba(87, 183, 223, .75);
+
+$secondary:                     rgb(255, 255, 255);
+$secondary--transparent:        rgba(255, 255, 255, 0.75);
+
+$font-color:                    rgb(60, 60, 60);
+
+$font-shadow-dark:              rgb(0, 0, 0);
+$font-shadow-dark--transparent: rgba(0, 0, 0, 0.8);
+
+$box-shadow:                    rgb(128, 128, 128);
+$box-shadow--transparent:       rgba(128, 128, 128, 0.44);
+
+$brand-primary:                 $primary;
+$input-border-focus:            $primary;
+
+$screen-sm-min:                 768px !default;
+$screen-md-min:                 992px !default;

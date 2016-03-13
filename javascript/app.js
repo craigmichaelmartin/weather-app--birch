@@ -7,7 +7,9 @@ import ChartView from './components/chart';
 import AppAlert from './components/alert';
 import $ from 'jquery';
 import _ from 'underscore';
-import 'bootstrap';
+import 'bootstrap/dist/js/umd/util';
+import 'bootstrap/dist/js/umd/alert';
+import 'bootstrap/dist/js/umd/button';
 import 'es5-shim';
 
 const fs = require('fs');

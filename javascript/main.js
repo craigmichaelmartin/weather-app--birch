@@ -5,8 +5,10 @@ import Days from './collections/days';
 import Hours from './collections/hours';
 import Backbone from 'backbone';
 import $ from 'jquery';
+import 'bootstrap/dist/js/umd/util';
+import 'bootstrap/dist/js/umd/alert';
+import 'bootstrap/dist/js/umd/button';
 import 'es5-shim';
-import 'bootstrap';
 
 $.ajaxSetup({cache: false});
 

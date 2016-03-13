@@ -8,7 +8,7 @@
 }
 
 .hourBar.is-active {
-    fill: @primary;
+    fill: $primary;
 }
 
 .hourText {
@@ -16,13 +16,13 @@
 }
 
 .d3Chart rect {
-    fill: @secondary;
-    fill: @secondary--transparent;
+    fill: $secondary;
+    fill: $secondary--transparent;
     shape-rendering: crispEdges;
 }
 
 .d3Chart text {
-    fill: @font-color;
+    fill: $font-color;
     text-shadow: .1em .1em .5em white;
     font: 12px sans-serif;
     text-anchor: middle;
@@ -62,7 +62,7 @@
   display: none;
 }
 
-@media (max-width: @screen-sm-min) {
+@media (max-width: $screen-sm-min) {
 
     .d3Chart {
         height: 250px;
