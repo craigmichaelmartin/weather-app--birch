@@ -53,10 +53,9 @@
     "demo": "npm run setup && npm run demo-server",
     "demo-server": "http-server ./ -p 9001 -o",
     "dev-server": "http-server ../ -p 8080 -o",
-    "deployment": "git checkout gh-pages && git fetch origin master && git reset --hard origin/master && npm run setup && rsync -var --delete-after weather-app--ash/ . && rm -rf Gruntfile.js README.md bower.json build.txt package.json .bowerrc .gitignore node_modules/ less/ test/ public/vendor/JSON-js/ public/vendor/backbone public/vendor/bootstrap/.bower.json public/vendor/bootstrap/Gruntfile.js public/vendor/bootstrap/LICENSE public/vendor/bootstrap/README.md public/vendor/bootstrap/bower.json public/vendor/bootstrap/fonts public/vendor/bootstrap/dist/css/ public/vendor/bootstrap/dist/js public/vendor/bootstrap/grunt public/vendor/bootstrap/js public/vendor/bootstrap/less/ public/vendor/bootstrap/package.js public/vendor/bootstrap/package.json public/vendor/d3 public/vendor/es5-shim public/vendor/handlebars public/vendor/jquery public/vendor/requirejs-text public/vendor/sinon-shai public/vendor/sinonjs public/vendor/underscore javascript/.jscsrc javascript/.jshintrc && git add . && git commit -m 'deploy app' && git push -f origin gh-pages && git checkout master",
+    "deployment": "git checkout gh-pages && git fetch origin master && git reset --hard origin/master && npm run setup && rm -rf README.md package.json .gitignore karma.conf.js node_modules/ scss/ test/ javascript/ && git add . && git commit -m 'deploy app' && git push -f origin gh-pages && git checkout master",
     "make-static-dirs": "mkdir -p css && mkdir -p compiledES6",
     "clean-built-dirs": "rm -rf weather-app--birch && rm -rf css && rm -rf compiledES6",
-    "clean-installed-dirs": "rm -rf node_modules && rm -rf public",
     "watch-scss": "watch 'npm run build-scss' scss/",
     "build-scss": "node-sass scss/main.scss css/app.css && npm run autoprefixer && npm run cssmin",
     "watch-es6": "watchify -t babelify -t brfs javascript/main.js -o compiledES6/main.js -dv",
@@ -75,8 +74,8 @@
     "autoprefixer": "postcss --use autoprefixer css/app.css -o css/app.css",
     "cssmin": "cssmin css/app.css > css/app.min.css",
     "dist": "npm run clean-built-dirs && npm run make-static-dirs && npm run build",
-    "setup-project": "npm run clean-installed-dirs && npm install && bower install",
-    "setup": "npm run setup-project && npm run dist"
+    "preinstall": "rm -rf node_modules",
+    "setup": "npm install && npm run dist"
   },
   "browserify": {
     "debug": "true",
