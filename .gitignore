@@ -1,6 +1,5 @@
-weather-app--ash/*
-components/*
-public/vendor/*
+weather-app--birch/*
+compiledES6
 node_modules/*
 .DS_Store
 *.swp
