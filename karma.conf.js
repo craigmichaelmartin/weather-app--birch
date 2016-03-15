@@ -24,7 +24,9 @@ module.exports = function(config) {
         'node_modules/jquery/dist/jquery.js',
         'node_modules/underscore/underscore.js',
         'node_modules/es5-shim/es5-shim.js',
-        'node_modules/bootstrap/dist/js/bootstrap.js',
+        'node_modules/bootstrap/dist/js/umd/util.js',
+        'node_modules/bootstrap/dist/js/umd/alert.js',
+        'node_modules/bootstrap/dist/js/umd/button.js',
         'node_modules/babel-polyfill/dist/polyfill.js',
         'node_modules/d3/d3.js',
         'test/mocha/assets.js',
@@ -36,7 +38,7 @@ module.exports = function(config) {
         'node_modules/chai/chai.js',
         'test/mocha/specs/**/*.spec.js',
         {
-            pattern: 'node_modules/bootstrap/dist/fonts/*',
+            pattern: 'node_modules/font-awesome/fonts/*',
             included: false
         }
     ],
