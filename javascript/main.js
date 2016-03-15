@@ -1,3 +1,4 @@
+import './util/leak_jquery';
 import AppView from './app';
 import AppRouter from './router';
 import AppState from './models/app';

@@ -1,3 +1,4 @@
+import './util/leak_jquery';
 import View from './views/view';
 import ScaleView from './components/scale';
 import LocationView from './components/location';
