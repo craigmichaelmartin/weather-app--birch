@@ -2,7 +2,8 @@ import View from '../views/view';
 import _ from 'underscore';
 
 const fs = require('fs');
-const template = fs.readFileSync(__dirname + '/../templates/alert.html', 'utf8');
+const path = require('path');
+const template = fs.readFileSync(path.join(__dirname, '/../templates/alert.html'), 'utf8');
 
 class AlertView extends View {
 

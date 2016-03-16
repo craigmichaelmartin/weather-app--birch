@@ -4,7 +4,8 @@ import $ from 'jquery';
 import _ from 'underscore';
 
 const fs = require('fs');
-const template = fs.readFileSync(__dirname + '/../templates/day.html', 'utf8');
+const path = require('path');
+const template = fs.readFileSync(path.join(__dirname, '/../templates/day.html'), 'utf8');
 
 class DayView extends View {
 

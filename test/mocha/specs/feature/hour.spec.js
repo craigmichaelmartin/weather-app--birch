@@ -50,7 +50,7 @@ describe('App after loading', () => {
             });
             it('should add the active class to it\'s bar', () => {
                 const time = $clickedHourText.data('time');
-                const el = $('[data-time=\'' + time + '\']')[0];
+                const el = $(`[data-time="${time}"]`)[0];
                 expect(el.className.animVal.indexOf('is-active') >= 0).to.be.true;
             });
             it('should result in only one active class', () => {
@@ -73,7 +73,7 @@ describe('App after loading', () => {
             });
             it('should add the active class to it\'s bar', () => {
                 const time = $clickedHourText.data('time');
-                const el = $('[data-time=\'' + time + '\']')[0];
+                const el = $(`[data-time="${time}"]`)[0];
                 expect(el.className.animVal.indexOf('is-active') >= 0).to.be.true;
             });
             it('should result in only one active class', () => {

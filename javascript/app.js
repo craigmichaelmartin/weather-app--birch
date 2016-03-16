@@ -14,7 +14,8 @@ import 'bootstrap/dist/js/umd/button';
 import 'es5-shim';
 
 const fs = require('fs');
-const template = fs.readFileSync(__dirname + '/templates/app.html', 'utf8');
+const path = require('path');
+const template = fs.readFileSync(path.join(__dirname, '/templates/app.html'), 'utf8');
 
 class AppView extends View {
 

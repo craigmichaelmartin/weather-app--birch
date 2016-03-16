@@ -6,7 +6,8 @@ import $ from 'jquery';
 import d3 from 'd3';
 
 const fs = require('fs');
-const template = fs.readFileSync(__dirname + '/../templates/chart.html', 'utf8');
+const path = require('path');
+const template = fs.readFileSync(path.join(__dirname, '/../templates/chart.html'), 'utf8');
 
 class ChartView extends View {
 
@@ -143,7 +144,6 @@ class ChartView extends View {
         $('.svg-container').css('padding-bottom', `${ratioPercentage}%`);
         if ($.isNumeric(this.appState.get('hour'))) {
             const time = this.appState.get('hour');
-            $('.js-hourBar[data-time=\'' + time + '\']')[0].setAttribute('class', 'js-hourBar hourBar is-active');
             $(`.js-hourBar[data-time="${time}"]`)[0].setAttribute('class', 'js-hourBar hourBar is-active');
         }
     }

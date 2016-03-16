@@ -14,7 +14,7 @@ import 'es5-shim';
 $.ajaxSetup({cache: false});
 
 const appState = new AppState();
-const appRouter = new AppRouter({appState: appState}); // jshint ignore:line
+const appRouter = new AppRouter({appState}); // eslint-disable-line no-unused-vars
 const app = new AppView({
     el: $('.js-weatherApp'),
     days: new Days(),

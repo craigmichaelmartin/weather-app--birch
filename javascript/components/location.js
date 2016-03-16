@@ -3,7 +3,8 @@ import {getScaledTemperatureDegreeUnit} from '../util/temperature';
 import _ from 'underscore';
 
 const fs = require('fs');
-const template = fs.readFileSync(__dirname + '/../templates/location.html', 'utf8');
+const path = require('path');
+const template = fs.readFileSync(path.join(__dirname, '/../templates/location.html'), 'utf8');
 
 class LocationView extends View {
 

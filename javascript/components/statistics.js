@@ -6,8 +6,9 @@ import {getScaledSpeedUnit} from '../util/speed';
 import _ from 'underscore';
 
 const fs = require('fs');
-const dayTemplate = fs.readFileSync(__dirname + '/../templates/day_statistics.html', 'utf8');
-const hourTemplate = fs.readFileSync(__dirname + '/../templates/hour_statistics.html', 'utf8');
+const path = require('path');
+const dayTemplate = fs.readFileSync(path.join(__dirname, '/../templates/day_statistics.html'), 'utf8');
+const hourTemplate = fs.readFileSync(path.join(__dirname, '/../templates/hour_statistics.html'), 'utf8');
 
 class StatisticsView extends View {
 

@@ -75,7 +75,7 @@ describe('App state model', () => {
                     clock.restore();
                 });
                 it('should not be set and contain an error message for hour without day', () => {
-                    expect(appState.set({zip: 44147, hour: 13, day: undefined}, {validate: true})).to.be.false;
+                    expect(appState.set({zip: 44147, hour: 13, day: void 0}, {validate: true})).to.be.false;
                     expect(appState.validationError).to.eql([AppStateModel.prototype.hourNeedsDay]);
                     expect(message).to.eql([appState.hourNeedsDay]);
                 });

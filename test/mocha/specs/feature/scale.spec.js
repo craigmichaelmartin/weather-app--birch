@@ -33,24 +33,24 @@ describe('App after loading', () => {
             });
             it('should change the day\'s temperatures to metric', () => {
                 const test = $('.js-dayHighTemperature').first().text();
-                const actual = getScaledTemperature('metric', app.days.models[0].get('high')) + '°';
+                const actual = getScaledTemperature('metric', app.days.models[0].get('high')) + '°';// eslint-disable-line prefer-template
                 expect(test).to.equal(actual);
             });
             it('should change the hours temperatures to metric', () => {
                 const test = $('.js-hourTemperature').first().text();
-                const actual = getScaledTemperature('metric', app.hours.byDay(app.appState.get('day')).models[0].get('temperature')) + '°';
+                const actual = getScaledTemperature('metric', app.hours.byDay(app.appState.get('day')).models[0].get('temperature')) + '°';// eslint-disable-line prefer-template
                 expect(test).to.equal(actual);
             });
             it('should change the day statistics temperatures to metric', () => {
                 const test = $('.js-dayStatisticsHigh').text();
                 const day = app.days.findWhere({day: app.appState.get('day')});
-                const actual = getScaledTemperature('metric', day.get('high')) + '°C';
+                const actual = getScaledTemperature('metric', day.get('high')) + '°C';// eslint-disable-line prefer-template
                 expect(test).to.equal(actual);
             });
             it('should change the hour statistics temperatures to metric', () => {
                 domEvent('click', $('.js-hourBar').first()[0]);
                 const test = $('.js-hourStatisticsTemperature').text();
-                const actual = getScaledTemperature('metric', app.hours.byDay(app.appState.get('day')).models[0].get('temperature')) + '°C';
+                const actual = getScaledTemperature('metric', app.hours.byDay(app.appState.get('day')).models[0].get('temperature')) + '°C';// eslint-disable-line prefer-template
                 expect(test).to.equal(actual);
             });
         });
