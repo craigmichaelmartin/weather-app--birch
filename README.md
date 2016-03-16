@@ -2,11 +2,14 @@
 using the latest EcmaScript 2015 (ES6) additions,  
 transpiled with babel and moduled with ES6 modules using Browersify,  
 built with the Backbone framework,  
-styled with SASS and Bootstrap 4 (Alpha) within the SUITCSS mindset,  
+styled with SASS and Bootstrap 4 (Alpha)  
+within the BEM inspired SUITCSS methodology,  
 charted with D3 and enhanced with Font Awesome vector icons,  
-convenienced by underscore and jquery,  
+convenienced by Underscore and jQuery,  
 tested with Karma, Mocha, Chai, and Sinon,  
-tooled with npm for dependepenies, and  npm scripts for tasks with  
+using PhantomJS, Chrome, Firefox, and Safari,  
+tooled with npm for package management,  
+and npm scripts for tasks involving  
 ESLint, Uglify, Autoprefixer, CSScomb,  
 CSSLint, CSSMin, Clean-css, Http-server, and more.
 

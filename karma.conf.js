@@ -9,9 +9,10 @@ module.exports = function(config) {
     plugins: [
         'karma-babel-preprocessor',
         'karma-mocha',
-        'karma-phantomjs-launcher',
+        'karma-phantomjs2-launcher',
         'karma-firefox-launcher',
         'karma-chrome-launcher',
+        'karma-safari-launcher',
         'karma-sinon-chai',
         'karma-sinon',
         'karma-chai',
@@ -84,9 +85,26 @@ module.exports = function(config) {
 
 
     // start these browsers
-    //browsers: ['Chrome', 'Firefox', 'PhantomJS', 'ChromeCanary', 'Safari', 'Opera', 'IE'],
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS2', 'PhantomJS2_custom'],
 
+    customLaunchers: {
+      'PhantomJS2_custom': {
+        base: 'PhantomJS2',
+        options: {
+          windowName: 'my-window',
+          settings: {
+            webSecurityEnabled: false
+          },
+        },
+        flags: ['--load-images=true'],
+        debug: true
+      }
+    },
+
+    phantomjsLauncher: {
+      // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
+      exitOnResourceError: true
+    },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
