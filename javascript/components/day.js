@@ -19,9 +19,9 @@ class DayView extends View {
         };
     }
 
-    initialize(options) {
-        this.model = options.model;
-        this.appState = options.appState;
+    initialize({model, appState}) {
+        this.model = model;
+        this.appState = appState;
     }
 
     deleteViewAndModel() {

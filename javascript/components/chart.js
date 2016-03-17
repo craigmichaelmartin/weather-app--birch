@@ -22,9 +22,9 @@ class ChartView extends View {
         };
     }
 
-    initialize(options = {}) {
-        this.appState = options.appState;
-        this.hours = options.hours;
+    initialize({appState, hours}) {
+        this.appState = appState;
+        this.hours = hours;
         this.listenTo(this.appState, 'dataReady', this.render);
         this.listenTo(this.appState, 'change:day', this.render);
         this.listenTo(this.appState, 'change:scale', this.render);

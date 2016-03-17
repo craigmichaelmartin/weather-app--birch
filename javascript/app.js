@@ -23,11 +23,11 @@ class AppView extends View {
         return _.template(template);
     }
 
-    initialize(options = {}) {
-        this.appState = options.appState;
+    initialize({appState, days, hours}) {
+        this.appState = appState;
         this.render();
-        this.days = options.days;
-        this.hours = options.hours;
+        this.days = days;
+        this.hours = hours;
         this.listenToOnce(this.days, 'sync', this.ensureZip);
         this.listenToOnce(this.appState, 'dataReady', this.loadApp.bind(this));
         this.listenTo(this.appState, 'invalid', this.appStateInvalid);

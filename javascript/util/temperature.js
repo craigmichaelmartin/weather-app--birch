@@ -1,10 +1,9 @@
-const getScaledTemperature = function (scale, englishNumber, options = {}) {
-    options.toFixed || (options.toFixed = 0);
+const getScaledTemperature = function (scale, englishNumber, {toFixed = 0} = {}) {
     if (scale === 'english') {
-        return (+englishNumber).toFixed(options.toFixed);
+        return (+englishNumber).toFixed(toFixed);
     }
     if (scale === 'metric') {
-        return ((englishNumber - 32) * 5 / 9).toFixed(options.toFixed);
+        return ((englishNumber - 32) * 5 / 9).toFixed(toFixed);
     }
     throw new Error(`Cannot convert to scale "${scale}"`);
 };

@@ -12,10 +12,10 @@ const hourTemplate = fs.readFileSync(path.join(__dirname, '/../templates/hour_st
 
 class StatisticsView extends View {
 
-    initialize(options = {}) {
-        this.appState = options.appState;
-        this.hours = options.hours;
-        this.days = options.days;
+    initialize({appState, hours, days}) {
+        this.appState = appState;
+        this.hours = hours;
+        this.days = days;
         this.listenTo(this.appState, 'dataReady', this.render);
         this.listenTo(this.appState, 'change:day', this.showDay);
         this.listenTo(this.appState, 'change:hour', this.showHour);

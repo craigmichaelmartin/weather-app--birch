@@ -15,8 +15,8 @@ class AlertView extends View {
         return `The data provided was invalid. ${errors.join('. ')} .`;
     }
 
-    initialize(options = {}) {
-        this.errors = options.errors;
+    initialize({errors}) {
+        this.errors = errors;
     }
 
     getTemplateData() {

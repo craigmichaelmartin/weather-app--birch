@@ -18,8 +18,8 @@ class ScaleView extends View {
         };
     }
 
-    initialize(options = {}) {
-        this.model = options.appState;
+    initialize({appState}) {
+        this.model = appState;
         this.render();
     }
 

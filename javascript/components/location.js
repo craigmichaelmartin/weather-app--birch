@@ -21,9 +21,9 @@ class LocationView extends View {
         };
     }
 
-    initialize(options = {}) {
-        this.model = options.appState;
-        this.currentHour = options.currentHour;
+    initialize({appState, currentHour}) {
+        this.model = appState;
+        this.currentHour = currentHour;
         this.render();
         this.listenTo(this.model, 'change:zip', this.indicateLoading);
         this.listenTo(this.model, 'dataReady', this.render);

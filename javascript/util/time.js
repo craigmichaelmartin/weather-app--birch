@@ -1,15 +1,15 @@
-const get12HourNotation = function (hours, options = {}) {
+const get12HourNotation = function (hours, {hideMinutes} = {}) {
     const intHours = parseInt(hours, 10);
     const modHours = intHours % 12 || 12;
     const minutes = ':00';
-    const displayHours = options.hideMinutes ? modHours : modHours + minutes;
+    const displayHours = hideMinutes ? modHours : modHours + minutes;
     const ampm = intHours >= 12 ? 'pm' : 'am';
     return displayHours + ampm;
 };
 
-const get24HourNotation = function (hours, options = {}) {
+const get24HourNotation = function (hours, {hideMinutes} = {}) {
     const minutes = ':00';
-    const displayHours = `${options.hideMinutes ? hours : hours + minutes}`;
+    const displayHours = `${hideMinutes ? hours : hours + minutes}`;
     return displayHours;
 };
 
