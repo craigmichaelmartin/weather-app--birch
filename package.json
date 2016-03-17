@@ -64,7 +64,7 @@
     "watch": "npm run watch-es6 && npm run watch-scss",
     "build": "npm run build-scss & npm run build-es6",
     "karma": "karma start karma.conf.js",
-    "karma-dev": "karma start karma.conf.js --browsers Chrome,Firefox,Safari --log-level debug",
+    "karma-dev": "karma start karma.conf.js --browsers Chrome,Firefox",
     "test": "npm run lint && npm run karma",
     "test-lightning": "npm run lint & npm run karma",
     "lint": "npm run lint-app && npm run lint-tests && npm run lint-csscomb",
