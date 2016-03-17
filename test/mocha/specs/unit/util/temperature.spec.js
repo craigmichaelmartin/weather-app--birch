@@ -1,7 +1,7 @@
 import {getScaledTemperature} from '../../../../../javascript/util/temperature.js';
 import {expect} from 'chai';
 
-describe('get temperature', () => {
+describe('get scaled temperature', () => {
     it('should return english when passed in english and asked for english', () => {
         expect(getScaledTemperature('english', 32)).to.eql('32');
     });
