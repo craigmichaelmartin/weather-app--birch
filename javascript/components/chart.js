@@ -90,7 +90,7 @@ class ChartView extends View {
         }));
 
         x.domain(data.map(getTime));
-        y.domain([0, d3.max(data, getAbsTemp)]);
+        y.domain([0, this.hours.getMaxTemp()]);
 
         const that = this;
         xAxis.tickValues(

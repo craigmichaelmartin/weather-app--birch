@@ -29,6 +29,10 @@ class Hours extends Collection {
         return new Hours(this.filter((model) => model.get('day') === day));
     }
 
+    getMaxTemp() {
+        return this.max('temperature').get('temperature');
+    }
+
     get comparator() {
         return 'hour';
     }
