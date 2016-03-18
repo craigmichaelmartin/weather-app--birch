@@ -1,9 +1,5 @@
 .day {
     cursor: pointer;
-    width: 10%;
-    float: left;
-    padding-left: 15px;
-    padding-right: 15px;
     text-shadow: $font-shadow-dark 0 0 3px;
     text-shadow: $font-shadow-dark--transparent 0 0 3px;
     color: white;
@@ -27,13 +23,20 @@
     display:block;
     margin:auto;
 }
-@media (max-width: 768px) {
+@media (max-width: $screen-sm-min) {
     .day-image {
         width: 30px;
         height: 30px;
     }
     .day {
-        width: 100%;
-        float: none;
+        clear: both;
+    }
+}
+@media (min-width: $screen-sm-min) {
+    .day-temperature-high {
+        float: right;
+    }
+    .day-temperature-low {
+        float: left;
     }
 }
