@@ -64,16 +64,6 @@ class ChartView extends View {
         const width = $('.js-d3Chart').width() - margin.left - margin.right;
         const height = $('.js-d3Chart').height() - margin.upper - margin.bottom;
 
-        const x = d3.scale.ordinal()
-            .rangeRoundBands([0, width], 0.1);
-
-        const y = d3.scale.linear()
-            .range([height, 0]);
-
-        const xAxis = d3.svg.axis()
-            .scale(x)
-            .orient('bottom');
-
         const svg = d3.select('.js-d3Chart')
             .append('div')
             .classed('svg-container', true)
@@ -89,8 +79,21 @@ class ChartView extends View {
             time: model.get('hour')
         }));
 
-        x.domain(data.map(getTime));
-        y.domain([0, this.hours.getMaxTemp()]);
+        const minOverallTemp = this.hours.getMinTemp();
+        const maxOverallTemp = this.hours.getMaxTemp();
+
+        const y = d3.scale.linear()
+            .range([height, 0])
+            .domain([d3.min([0, minOverallTemp]), d3.max([maxOverallTemp, 0])])
+            .nice();
+        const x = d3.scale.ordinal()
+            .domain(data.map(getTime))
+            .rangeRoundBands([0, width], 0.1);
+
+        const xAxis = d3.svg.axis()
+            .scale(x)
+            .orient('bottom');
+
 
         const that = this;
         xAxis.tickValues(
@@ -114,8 +117,8 @@ class ChartView extends View {
             .attr('class', 'js-hourBar hourBar')
             .attr('x', (d, i) => i * (width / data.length))
             .attr('width', x.rangeBand())
-            .attr('y', (d) => y(d.temp))
-            .attr('height', (d) => height - y(d.temp))
+            .attr('y', (d) => y(Math.max(0, d.temp)))
+            .attr('height', (d) => Math.abs(y(d.temp) - y(0)))
             .attr('data-time', getTime);
 
         svg.selectAll()
@@ -124,7 +127,11 @@ class ChartView extends View {
             .append('text')
             .attr('class', 'hourText js-hourTemperature js-hourText')
             .attr('x', (d, i) => (i * width / data.length) + (width / data.length / 2) - 3)
-            .attr('y', (d) => y(d.temp) + 25)
+            .attr('y', (d) => {
+                if (d.temp > 0) return y(d.temp) + 40;
+                else if (d.temp < 0) return y(d.temp) - 30;
+                return y(d.temp) - 10;
+            })
             .attr('data-time', getTime)
             .text(getPresentationTemp.bind(this));
 
@@ -136,7 +143,11 @@ class ChartView extends View {
             .attr('font-family', 'sans-serif')
             .attr('font-size', '16px')
             .attr('x', (d, i) => (i * width / data.length) + (width / data.length / 2) - 3)
-            .attr('y', (d) => y(d.temp) + 50)
+            .attr('y', (d) => {
+                if (d.temp > 0) return y(d.temp) + 20;
+                else if (d.temp < 0) return y(d.temp) - 10;
+                return y(d.temp) + 10;
+            })
             .attr('data-time', getTime)
             .text(getPresentationTime.bind(this));
 

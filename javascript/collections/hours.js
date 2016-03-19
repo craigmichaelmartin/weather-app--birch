@@ -1,5 +1,6 @@
 import Collection from './collection';
 import Hour from '../models/hour';
+import _ from 'underscore';
 
 class Hours extends Collection {
 
@@ -30,7 +31,13 @@ class Hours extends Collection {
     }
 
     getMaxTemp() {
-        return this.max('temperature').get('temperature');
+        // Return maximum overall temperature
+        return _.max(this.pluck('temperature'), (t) => +t);
+    }
+
+    getMinTemp() {
+        // Return minimum overall temperature
+        return _.min(this.pluck('temperature'), (t) => +t);
     }
 
     get comparator() {
