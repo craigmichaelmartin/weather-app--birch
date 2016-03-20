@@ -53,7 +53,7 @@
     "demo": "npm run setup && npm run demo-server",
     "demo-server": "http-server ./ -p 9001 -o",
     "dev-server": "http-server ../ -p 8080 -o",
-    "deployment": "git checkout gh-pages && git fetch origin master && git reset --hard origin/master && npm run setup && rm -rf README.md package.json .gitignore karma.conf.js node_modules/ scss/ test/ javascript/ && git add . && git commit -m 'deploy app' && git push -f origin gh-pages && git checkout master",
+    "deployment": "git checkout gh-pages && git fetch origin master && git reset --hard origin/master && npm run setup && mkdir -p temp_node_modules/font-awesome/fonts/ && cp -r node_modules/font-awesome/fonts/ temp_node_modules/font-awesome/fonts/ && rm -rf README.md package.json .gitignore karma.conf.js node_modules/ scss/ test/ javascript/ && mkdir -p node_modules/font-awesome/fonts/ && cp -r temp_node_modules/font-awesome/fonts/ node_modules/font-awesome/fonts/ && rm -rf temp_node_modules && git add . && git commit -m 'deploy app' && git push -f origin gh-pages && git checkout master",
     "make-static-dirs": "mkdir -p css && mkdir -p compiledES6",
     "clean-built-dirs": "rm -rf weather-app--birch && rm -rf css && rm -rf compiledES6",
     "watch-scss": "watch 'npm run build-scss' scss/",
