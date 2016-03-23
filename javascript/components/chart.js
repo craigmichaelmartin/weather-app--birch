@@ -52,8 +52,7 @@ class ChartView extends View {
     afterRender() {
         const getTime = (d) => d.time;
         const getPresentationTime = (d) => getScaledTime(this.appState.get('scale'), d.time, {hideMinutes: true});
-        const getAbsTemp = (d) => Math.abs(d.temp);
-        const getPresentationTemp = (d) => `${getScaledTemperature(this.appState.get('scale'), d.temp)}°`;
+        const getPresentationTemp = (d) => `${(d.temp)}°`;
 
         const margin = {
             upper: 0,
@@ -75,12 +74,12 @@ class ChartView extends View {
             .attr('transform', `translate(${margin.left},${margin.upper})`);
 
         const data = this.hours.byDay(this.appState.get('day')).map((model) => ({
-            temp: model.get('temperature'),
+            temp: getScaledTemperature(this.appState.get('scale'), model.get('temperature')),
             time: model.get('hour')
         }));
 
-        const minOverallTemp = this.hours.getMinTemp();
-        const maxOverallTemp = this.hours.getMaxTemp();
+        const minOverallTemp = getScaledTemperature(this.appState.get('scale'), this.hours.getMinTemp());
+        const maxOverallTemp = getScaledTemperature(this.appState.get('scale'), this.hours.getMaxTemp());
 
         const y = d3.scale.linear()
             .range([height, 0])
@@ -133,7 +132,7 @@ class ChartView extends View {
                 return y(d.temp) - 10;
             })
             .attr('data-time', getTime)
-            .text(getPresentationTemp.bind(this));
+            .text(getPresentationTemp);
 
         svg.selectAll()
             .data(data)
