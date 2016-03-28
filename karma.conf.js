@@ -31,7 +31,7 @@ module.exports = function(config) {
         'node_modules/babel-polyfill/dist/polyfill.js',
         'node_modules/d3/d3.js',
         'test/mocha/assets.js',
-        'css/app.css',
+        'css/app.min.css',
         'javascript/main.js',
         'test/mocha/helpers.js',
         'node_modules/mocha/mocha.js',
