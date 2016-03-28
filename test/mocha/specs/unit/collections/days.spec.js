@@ -13,10 +13,10 @@ describe('Days collection', () => {
     describe('after being initialized', () => {
         describe('the buildUrl function', () => {
             it('should correctly handle no zip', () => {
-                expect(DaysCollection.prototype.buildUrl()).to.equal('http://api.wunderground.com/api/3f6df2a3f0916b99/geolookup/forecast10day/q/autoip.json');
+                expect(DaysCollection.prototype.buildUrl()).to.equal('//api.wunderground.com/api/3f6df2a3f0916b99/geolookup/forecast10day/q/autoip.json');
             });
             it('should correctly handle a zip', () => {
-                expect(DaysCollection.prototype.buildUrl(44024)).to.equal('http://api.wunderground.com/api/3f6df2a3f0916b99/forecast10day/q/44024.json');
+                expect(DaysCollection.prototype.buildUrl(44024)).to.equal('//api.wunderground.com/api/3f6df2a3f0916b99/forecast10day/q/44024.json');
             });
         });
         describe('the parse function', () => {

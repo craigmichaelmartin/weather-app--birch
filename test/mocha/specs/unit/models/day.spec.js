@@ -17,10 +17,10 @@ describe('Day model', () => {
     });
     describe('the buildUrl function', () => {
         it('should correctly handle no zip', () => {
-            expect(DayModel.prototype.buildUrl()).to.equal('http://api.wunderground.com/api/3f6df2a3f0916b99/hourly/q/autoip.json');
+            expect(DayModel.prototype.buildUrl()).to.equal('//api.wunderground.com/api/3f6df2a3f0916b99/hourly/q/autoip.json');
         });
         it('should correctly handle a zip', () => {
-            expect(DayModel.prototype.buildUrl(44024)).to.equal('http://api.wunderground.com/api/3f6df2a3f0916b99/hourly/q/44024.json');
+            expect(DayModel.prototype.buildUrl(44024)).to.equal('//api.wunderground.com/api/3f6df2a3f0916b99/hourly/q/44024.json');
         });
     });
 });

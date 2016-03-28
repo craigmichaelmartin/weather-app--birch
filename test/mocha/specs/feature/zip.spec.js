@@ -64,10 +64,10 @@ describe('App after loading', () => {
                     before(() => {
                         // record the number of requests with zip 44023
                         hourRequests = _.where(server.requests, {
-                            url: 'http://api.wunderground.com/api/3f6df2a3f0916b99/hourly10day/q/44023.json'
+                            url: '//api.wunderground.com/api/3f6df2a3f0916b99/hourly10day/q/44023.json'
                         });
                         dayRequests = _.where(server.requests, {
-                            url: 'http://api.wunderground.com/api/3f6df2a3f0916b99/forecast10day/q/44023.json'
+                            url: '//api.wunderground.com/api/3f6df2a3f0916b99/forecast10day/q/44023.json'
                         });
 
                         // less precise
@@ -98,8 +98,8 @@ describe('App after loading', () => {
                     });
                     it('should fetch the new forecast', () => {
                         server.respond();
-                        const hourUrl = 'http://api.wunderground.com/api/3f6df2a3f0916b99/hourly10day/q/44023.json';
-                        const dayUrl = 'http://api.wunderground.com/api/3f6df2a3f0916b99/forecast10day/q/44023.json';
+                        const hourUrl = '//api.wunderground.com/api/3f6df2a3f0916b99/hourly10day/q/44023.json';
+                        const dayUrl = '//api.wunderground.com/api/3f6df2a3f0916b99/forecast10day/q/44023.json';
                         const hourReqs = server.requests.filter((request) => request.url.includes(hourUrl));
                         const dayReqs = server.requests.filter((request) => request.url.includes(dayUrl));
                         // using the before count, we can ensure there was a new fetch

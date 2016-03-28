@@ -20,7 +20,7 @@ class Day extends Model {
     }
 
     buildUrl(zip) {
-        return `http://api.wunderground.com/api/3f6df2a3f0916b99/hourly/q/${zip || 'autoip'}.json`;
+        return `//api.wunderground.com/api/3f6df2a3f0916b99/hourly/q/${zip || 'autoip'}.json`;
     }
 
     parse(results) {

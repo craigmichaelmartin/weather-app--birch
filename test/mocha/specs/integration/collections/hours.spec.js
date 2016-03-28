@@ -23,10 +23,10 @@ describe('Hours collection', () => {
         });
         describe('the buildUrl function', () => {
             it('should correctly handle no zip', () => {
-                expect(hours.buildUrl()).to.equal('http://api.wunderground.com/api/3f6df2a3f0916b99/hourly10day/q/autoip.json');
+                expect(hours.buildUrl()).to.equal('//api.wunderground.com/api/3f6df2a3f0916b99/hourly10day/q/autoip.json');
             });
             it('should correctly handle a zip', () => {
-                expect(hours.buildUrl(44024)).to.equal('http://api.wunderground.com/api/3f6df2a3f0916b99/hourly10day/q/44024.json');
+                expect(hours.buildUrl(44024)).to.equal('//api.wunderground.com/api/3f6df2a3f0916b99/hourly10day/q/44024.json');
             });
         });
         describe('the parse function', () => {

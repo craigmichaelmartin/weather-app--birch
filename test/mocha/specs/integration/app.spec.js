@@ -21,11 +21,11 @@ describe('App', () => {
             expect(server.requests.length).to.equal(2);
             expect(server.requests[0].method).to.equal('GET');
             expect(server.requests[0].url).to.contain(
-                'http://api.wunderground.com/api/3f6df2a3f0916b99/geolookup/forecast10day/q/autoip.json'
+                '//api.wunderground.com/api/3f6df2a3f0916b99/geolookup/forecast10day/q/autoip.json'
             );
             expect(server.requests[1].method).to.equal('GET');
             expect(server.requests[1].url).to.contain(
-                'http://api.wunderground.com/api/3f6df2a3f0916b99/hourly10day/q/autoip.json'
+                '//api.wunderground.com/api/3f6df2a3f0916b99/hourly10day/q/autoip.json'
             );
         });
         it('should have an is-something class describing the condition', () => {

@@ -12,7 +12,7 @@ class Days extends Collection {
         // and instead as needed, but the rate limit and api design push me toward this path.
         // If no zip is provided, use the ip and return geolookup info as well.
         const end = `${zip ? '' : 'geolookup/'}forecast10day/q/${zip || 'autoip'}.json`;
-        return `http://api.wunderground.com/api/3f6df2a3f0916b99/${end}`;
+        return `//api.wunderground.com/api/3f6df2a3f0916b99/${end}`;
     }
 
     fetch(options) {

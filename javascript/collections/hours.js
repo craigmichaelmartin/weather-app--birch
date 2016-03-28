@@ -12,7 +12,7 @@ class Hours extends Collection {
         // I would rather not get the full hourly forcast for all 10 days,
         // and instead as needed, but the rate limit and api design push me toward this path.
         const end = `${zip || 'autoip'}.json`;
-        return `http://api.wunderground.com/api/3f6df2a3f0916b99/hourly10day/q/${end}`;
+        return `//api.wunderground.com/api/3f6df2a3f0916b99/hourly10day/q/${end}`;
     }
 
     fetch(options) {
