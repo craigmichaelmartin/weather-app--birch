@@ -1,3 +1,5 @@
+import 'es5-shim';
+import 'babel-polyfill';
 import './util/leak_jquery';
 import AppView from './app';
 import AppRouter from './router';
@@ -9,7 +11,6 @@ import $ from 'jquery';
 import 'bootstrap/dist/js/umd/util';
 import 'bootstrap/dist/js/umd/alert';
 import 'bootstrap/dist/js/umd/button';
-import 'es5-shim';
 
 $.ajaxSetup({cache: false});
 

@@ -28,7 +28,6 @@ module.exports = function(config) {
         'node_modules/bootstrap/dist/js/umd/util.js',
         'node_modules/bootstrap/dist/js/umd/alert.js',
         'node_modules/bootstrap/dist/js/umd/button.js',
-        'node_modules/babel-polyfill/dist/polyfill.js',
         'node_modules/d3/d3.js',
         'test/mocha/assets.js',
         'css/app.min.css',
