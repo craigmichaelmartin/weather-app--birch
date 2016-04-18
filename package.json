@@ -19,6 +19,7 @@
     "cssmin": "^0.4.3",
     "d3": "3.5.14",
     "es5-shim": "4.5.2",
+    "eslint": "^2.8.0",
     "font-awesome": "~4.5.0",
     "http-server": "craigmichaelmartin/http-server#v0.10.0",
     "jasmine-core": "~2.3.4",
