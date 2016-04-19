@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  # - "5" -- Future Feature
+  - "4"
+  - "0.12"
+  - "iojs"
+
+install: npm run setup
+
+script: npm run test-ci
+
+addons:
+  sauce_connect:
+    username: "craigmichaelmartin"
+    access_key:
+        secure: "rSpudB5NYzdgk9zTdWPlpas0UKag8X4DGimihCkOsbnAB5XMn7ec1KGjNsYztUEOXHwxZLDoANBFKgfHrzoNmYVr9OKzD5ayFuqoVcuRsBhgO/X2sJW+XSFNn4WpU3qkEv2DPi5Q5onrbTpb8euSmXbEZMT49i2pz9dVF2EBl5AEH57ehvfG65HD5uCJgbx2GQlB9lskZJzAEKAVnlJjnPkvNijrYjBI2ARfMCXN1HMKykQIn9bNd1jYRZK/ynK/n5IMOaHSlMmEdq6SpNx13ogBY4KHV8Xt9MbC2ShV/47Q64iDZorMN9suqQ7RPrrb0kXWmS5vvN1481ydwh38Uain0SRzTtH2VOrvx2+zuG6ddr1dtfV661TBHXagGav5/xkOJV5r+r72xhQVFnJcgLfX3oXWU0cl3rnMIG3Oc0coFN20IAQWT1W3hnVUr6oYnjJj7k4x/1iEbZAVY2nKoT/tYdDBS/Mb09Xz9Xp/qR5k74nsb+etFGgZivmvTHK9RMPrFH2M+GlxrnB03ZFanNalN8xJ4f1P+NjbGOx7Cblik8X/3HRCtZBIYJaCaH+IjsGhlZ6D1bJlIZvyZ9JIPa6bX0ZGDjEo87TXvcoJfe98R12InFEHsoTzUPeE+UEziCQ/nnZQPCOwsE9ik7CYcT4fwwF12F3YX5188TTvza0="
