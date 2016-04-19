@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  # - "5" -- Future Feature
+  - "4"
+  - "0.12"
+  - "iojs"
+
+install: npm run setup
+
+script:
+    - npm run test-ci
+
+addons:
+  sauce_connect:
+    username: "xerona"
+    access_key:
+        secure: "oGKlhh2f0zXbn3hfA1UDAlRDGYc6QYwNMyy2AXMfH25QEyVfiDGkpC5Hjr52Wnah/9KKGhwGYrg6KV2t8y+PGHIMxMKiSGhZ+OMU9THODZP+7zUYirJQ7i9xnrb+eKAcexrjITiCODBp+s8F6BZt0kgEbL0BqtAdVtY8fAvHG80B2QAmcyj4fDpXw2PVYapxj37Hule5wHPAnVAjX/PPVPU8dxQcvraetX7Z+ym2q5lZ/jTFZvQ3zi8ae03vmEM/u7ofUQI5EIOHgpgnITj8DxRmuoygxJoqWMu3lFvGuk9vpC4+EGnCeL1myeBF30OJvmyhQmIwgUVg+dhC6C4FiXvtPhpW1kddLCMKg23qRLj0zYz8/njr2cjmOmMOl027yESueFW2kt0yZLzeIoNw3l2m/dcPmRq4HejtiI7PPf0hIdRgmIV0QV/WPfaqu7nMQl1Hb9lNtEqLiFLN4AYXoDc4isPN1C5nPJnI5JlKvElqtquVfYg7hqo1UQQjo1+EoPa+Q9/GqDyvNrteOL8IDhbEOw9M4NpMCO68fmeE2kUJLRMaFiEUQLKPlmgQ3iX47Au4kN661HQpU4y4umq1tjp1wEq7tNdrPxJA7YxAx7aV2RIEpk7EET9Mn1LM/Xd68xotm9ItJ8rec9uHAIJWj7xnN6PCJrxik8VMxTblT+E="
