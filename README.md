@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/xerona/weather-app--birch.svg?branch=master)](https://travis-ci.org/xerona/weather-app--birch)
+[![Build Status](https://travis-ci.org/craigmichaelmartin/weather-app--birch.svg?branch=master)](https://travis-ci.org/craigmichaelmartin/weather-app--birch)
 
 ##### A simple javascript weather web app  
 using the latest EcmaScript 2015 (ES6) additions,  
