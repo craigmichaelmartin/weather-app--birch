@@ -80,7 +80,6 @@
     "autoprefixer": "postcss --use autoprefixer css/app.css -o css/app.css",
     "cssmin": "cssmin css/app.css > css/app.min.css",
     "dist": "npm run clean-built-dirs && npm run make-static-dirs && npm run build",
-    "preinstall": "rm -rf node_modules",
     "setup": "npm install && npm run dist"
   },
   "browserify": {
