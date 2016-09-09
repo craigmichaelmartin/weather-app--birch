@@ -6,7 +6,7 @@
   "dependencies": {
     "babel-polyfill": "~6.5.0",
     "backbone": "1.2.3",
-    "bootstrap": "~4.0.0-alpha.2",
+    "bootstrap": "4.0.0-alpha.2",
     "d3": "3.5.14",
     "es5-shim": "4.5.2",
     "font-awesome": "~4.5.0",
